@@ -1,0 +1,58 @@
+{
+  "FictionalFixture": true,
+  "FixtureNotice": "FICTIONAL TEST FIXTURE - NOT A REAL COMPUTER REPORT",
+  "Tool": { "Name": "PC Full Check for Windows", "Version": "0.1.0-beta", "Author": "Ayman Bounaouj" },
+  "GeneratedAt": "2030-01-15T11:30:00.0000000Z",
+  "Mode": "Standard",
+  "Privacy": { "SensitiveDataIncluded": false, "State": "Privacy mode only (v0.1.0-beta)" },
+  "Assessment": "Attention required",
+  "System": {
+    "Windows": { "Caption": "Fictional Windows edition", "Version": "FICTIONAL", "BuildNumber": "FICTIONAL", "OSArchitecture": "Fictional architecture" },
+    "Manufacturer": "Fictional Vendor",
+    "Model": "Fictional Model",
+    "CPU": { "Name": "Fictional Processor" },
+    "TotalRAMBytes": 16000000000,
+    "GPUs": [{ "Name": "Fictional Graphics Adapter" }],
+    "Storage": [{ "FriendlyName": "Fictional Storage Device", "HealthStatus": "Healthy" }],
+    "Battery": { "BatteryCount": 1, "EstimatedHealthPercent": null }
+  },
+  "Findings": {
+    "ProblemDeviceCount": 1,
+    "WHEAEventCount": 0,
+    "WHEAObservedFirst": null,
+    "WHEAObservedLast": null,
+    "StorageReliabilityStatus": "Passed",
+    "WindowsIntegrity": [],
+    "DefenderStatus": "Passed"
+  },
+  "Counts": { "Completed": 21, "Passed": 17, "Warning": 3, "Failed": 0, "Unavailable": 1, "Omitted": 0 },
+  "Checks": [
+    { "Name": "WindowsInfo", "DisplayName": "Windows information", "Status": "Passed", "StartTime": "2030-01-15T11:30:01.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "SystemInfo", "DisplayName": "Computer manufacturer and model", "Status": "Passed", "StartTime": "2030-01-15T11:30:02.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "CPU", "DisplayName": "Processor", "Status": "Passed", "StartTime": "2030-01-15T11:30:03.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "Memory", "DisplayName": "Memory", "Status": "Passed", "StartTime": "2030-01-15T11:30:04.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "Display", "DisplayName": "Graphics and displays", "Status": "Passed", "StartTime": "2030-01-15T11:30:05.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "Storage", "DisplayName": "Physical storage", "Status": "Passed", "StartTime": "2030-01-15T11:30:06.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "Volumes", "DisplayName": "Volumes and free space", "Status": "Passed", "StartTime": "2030-01-15T11:30:07.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "ProblemDevices", "DisplayName": "Problem devices", "Status": "Warning", "StartTime": "2030-01-15T11:30:08.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "Fictional device warning required for assessment testing.", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "Defender", "DisplayName": "Microsoft Defender", "Status": "Passed", "StartTime": "2030-01-15T11:30:09.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "TPM", "DisplayName": "Trusted Platform Module", "Status": "Passed", "StartTime": "2030-01-15T11:30:10.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "SecureBoot", "DisplayName": "Secure Boot", "Status": "Warning", "StartTime": "2030-01-15T11:30:11.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "Fictional Secure Boot warning required for assessment testing.", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "WindowsUpdates", "DisplayName": "Recent Windows updates", "Status": "Passed", "StartTime": "2030-01-15T11:30:12.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "StorageReliability", "DisplayName": "Storage reliability counters", "Status": "Passed", "StartTime": "2030-01-15T11:30:13.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "SignedDrivers", "DisplayName": "Signed drivers", "Status": "Passed", "StartTime": "2030-01-15T11:30:14.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "Battery", "DisplayName": "Battery health", "Status": "Unavailable", "StartTime": "2030-01-15T11:30:15.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "Fictional unavailable capability required for assessment testing.", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "SleepStates", "DisplayName": "Sleep-state availability", "Status": "Passed", "StartTime": "2030-01-15T11:30:16.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": 0, "Critical": false, "Data": { "QueryCompleted": true, "ProcessStarted": true, "TimedOut": false, "ExitCode": 0, "StandardOutputPresent": true, "StandardOutputLength": 100, "StandardErrorPresent": false, "StandardErrorLength": 0, "LocalizedOutputParsed": false, "RawOutputSaved": false } },
+    { "Name": "ActivePowerPlan", "DisplayName": "Active power plan", "Status": "Passed", "StartTime": "2030-01-15T11:30:17.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": 0, "Critical": false, "Data": { "SchemeGuid": null, "LocalizedNameOmitted": true } },
+    { "Name": "InstalledPrograms", "DisplayName": "Installed programs", "Status": "Passed", "StartTime": "2030-01-15T11:30:18.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": [] },
+    { "Name": "NetworkAdapters", "DisplayName": "Network adapters", "Status": "Passed", "StartTime": "2030-01-15T11:30:19.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": [] },
+    { "Name": "CriticalSystemEvents", "DisplayName": "Recent critical System events", "Status": "Warning", "StartTime": "2030-01-15T11:30:20.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "Fictional event warning required for assessment testing.", "ExitCode": null, "Critical": false, "Data": null },
+    { "Name": "WHEAEvents", "DisplayName": "WHEA event summary", "Status": "Passed", "StartTime": "2030-01-15T11:30:21.0000000Z", "DurationMs": 1, "OutputFile": "", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": null }
+  ],
+  "Limitations": [
+    "Results depend on hardware, Windows edition, permissions, drivers, and supported system capabilities.",
+    "Unavailable and omitted checks are not treated as healthy.",
+    "Localized native-command text is not parsed to make additional health claims.",
+    "This report is a diagnostic aid and not a professional certification."
+  ]
+}

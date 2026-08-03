@@ -1,0 +1,44 @@
+# Real diagnostic output
+/PC_FULL_CHECK_FIXED.ps1
+/legacy/PC_FULL_CHECK_FIXED.ps1
+PC_FULL_CHECK_*/
+**/PC_FULL_CHECK_*/
+tmp-validation-output/
+private-test-output/
+local-reports/
+local-validation/
+/local-audit/
+reports/
+report-output/
+**/report-output/
+*.zip
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Generated report formats only inside report-output directories
+**/report-output/**/*.html
+**/report-output/**/*.json
+**/report-output/**/*.xml
+**/report-output/**/*.csv
+**/report-output/**/*.txt
+
+# Common scratch directories
+tmp/
+temp/
+
+# Keep intentional fictional examples
+!examples/
+!examples/**

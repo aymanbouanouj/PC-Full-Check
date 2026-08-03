@@ -1,0 +1,22 @@
+FICTIONAL SANITIZED EXAMPLE — NOT A REAL COMPUTER REPORT
+
+PC Full Check for Windows 0.1.0-beta
+Author: Ayman Bounaouj
+Mode: Quick
+Privacy: Privacy mode
+Assessment: Attention required
+
+Windows: Microsoft Windows 11 Pro, fictional build 00000, 64-bit
+Computer: Example Computer Company, Fictional Notebook Model
+CPU: Example 8-Core Processor
+RAM: 16.0 GiB
+GPU: Example Integrated Graphics
+Storage: Example Solid State Drive, Windows health Healthy
+Problem devices: 1 fictional example device
+Microsoft Defender: Passed
+
+Unavailable information is not considered healthy. This sample intentionally
+contains no real serial, UUID, account, organization, address, profile path,
+registration, license, or network identifier.
+
+This tool is a diagnostic aid and not a professional certification.

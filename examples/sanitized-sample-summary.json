@@ -1,0 +1,72 @@
+{
+  "SampleNotice": "FICTIONAL SANITIZED EXAMPLE - NOT A REAL COMPUTER REPORT",
+  "Tool": {
+    "Name": "PC Full Check for Windows",
+    "Version": "0.1.0-beta",
+    "Author": "Ayman Bounaouj"
+  },
+  "GeneratedAt": "2030-01-15T10:30:00.0000000Z",
+  "Mode": "Quick",
+  "Privacy": {
+    "SensitiveDataIncluded": false,
+    "State": "Privacy mode only (v0.1.0-beta)"
+  },
+  "Assessment": "Attention required",
+  "System": {
+    "Windows": {
+      "Caption": "Fictional Windows edition",
+      "Version": "FICTIONAL",
+      "BuildNumber": "FICTIONAL",
+      "OSArchitecture": "Fictional architecture"
+    },
+    "Manufacturer": "Fictional Vendor",
+    "Model": "Fictional Model",
+    "CPU": {
+      "Name": "Fictional Processor",
+      "Manufacturer": "Fictional Vendor",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 16,
+      "MaxClockMHz": 3000,
+      "VirtualizationEnabled": true,
+      "Status": "OK"
+    },
+    "TotalRAMBytes": 16000000000,
+    "GPUs": [{ "Name": "Fictional Graphics Adapter" }],
+    "Storage": [{ "FriendlyName": "Fictional Storage Device", "MediaType": "SSD", "HealthStatus": "Healthy", "OperationalStatus": ["OK"], "SizeBytes": 500000000000 }],
+    "Battery": null
+  },
+  "Findings": {
+    "ProblemDeviceCount": 1,
+    "WHEAEventCount": null,
+    "WHEAObservedFirst": null,
+    "WHEAObservedLast": null,
+    "StorageReliabilityStatus": "Unavailable",
+    "WindowsIntegrity": [],
+    "DefenderStatus": "Passed"
+  },
+  "Counts": {
+    "Completed": 9,
+    "Passed": 8,
+    "Warning": 1,
+    "Failed": 0,
+    "Unavailable": 0,
+    "Omitted": 0
+  },
+  "Checks": [
+    { "Name": "WindowsInfo", "DisplayName": "Windows information", "Status": "Passed", "StartTime": "2030-01-15T10:30:01.0000000Z", "DurationMs": 1, "OutputFile": "checks\\WindowsInfo.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": { "Caption": "Fictional Windows edition", "Version": "FICTIONAL", "BuildNumber": "FICTIONAL", "OSArchitecture": "Fictional architecture" } },
+    { "Name": "SystemInfo", "DisplayName": "Computer manufacturer and model", "Status": "Passed", "StartTime": "2030-01-15T10:30:02.0000000Z", "DurationMs": 1, "OutputFile": "checks\\SystemInfo.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": { "Manufacturer": "Fictional Vendor", "Model": "Fictional Model", "SystemType": "Fictional system type" } },
+    { "Name": "CPU", "DisplayName": "Processor", "Status": "Passed", "StartTime": "2030-01-15T10:30:03.0000000Z", "DurationMs": 1, "OutputFile": "checks\\CPU.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": [{ "Name": "Fictional Processor", "NumberOfCores": 8, "NumberOfLogicalProcessors": 16 }] },
+    { "Name": "Memory", "DisplayName": "Memory", "Status": "Passed", "StartTime": "2030-01-15T10:30:04.0000000Z", "DurationMs": 1, "OutputFile": "checks\\Memory.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": { "TotalPhysicalMemoryBytes": 16000000000, "Modules": [] } },
+    { "Name": "Display", "DisplayName": "Graphics and displays", "Status": "Passed", "StartTime": "2030-01-15T10:30:05.0000000Z", "DurationMs": 1, "OutputFile": "checks\\Display.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": { "GPUs": [{ "Name": "Fictional Graphics Adapter" }], "Monitors": [] } },
+    { "Name": "Storage", "DisplayName": "Physical storage", "Status": "Passed", "StartTime": "2030-01-15T10:30:06.0000000Z", "DurationMs": 1, "OutputFile": "checks\\Storage.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": [{ "FriendlyName": "Fictional Storage Device", "HealthStatus": "Healthy" }] },
+    { "Name": "Volumes", "DisplayName": "Volumes and free space", "Status": "Passed", "StartTime": "2030-01-15T10:30:07.0000000Z", "DurationMs": 1, "OutputFile": "checks\\Volumes.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": [{ "DriveLetter": "X", "FileSystem": "NTFS", "HealthStatus": "Healthy", "OperationalStatus": ["OK"], "SizeBytes": 100000000000, "FreeBytes": 50000000000 }] },
+    { "Name": "ProblemDevices", "DisplayName": "Problem devices", "Status": "Warning", "StartTime": "2030-01-15T10:30:08.0000000Z", "DurationMs": 1, "OutputFile": "checks\\ProblemDevices.json", "Error": "", "Message": "Fictional warning for schema illustration.", "ExitCode": null, "Critical": false, "Data": { "ProblemDeviceCount": 1, "Devices": [{ "Status": "Warning", "Class": "Fictional device class", "FriendlyName": "Fictional device", "Problem": 1 }] } },
+    { "Name": "Defender", "DisplayName": "Microsoft Defender", "Status": "Passed", "StartTime": "2030-01-15T10:30:09.0000000Z", "DurationMs": 1, "OutputFile": "checks\\Defender.json", "Error": "", "Message": "", "ExitCode": null, "Critical": false, "Data": { "AntivirusEnabled": true, "AntispywareEnabled": true, "RealTimeProtectionEnabled": true, "BehaviorMonitorEnabled": true, "AntivirusSignatureVersion": "FICTIONAL", "AntivirusSignatureLastUpdate": null } }
+  ],
+  "Limitations": [
+    "Results depend on hardware, Windows edition, permissions, drivers, and supported system capabilities.",
+    "Unavailable and omitted checks are not treated as healthy.",
+    "Localized native-command text is not parsed to make additional health claims.",
+    "This report is a diagnostic aid and not a professional certification."
+  ]
+}
