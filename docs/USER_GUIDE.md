@@ -18,7 +18,7 @@ The tool checks selected Windows, manufacturer/model, processor, memory, display
 
 ## 5. What the tool does not do
 
-The tool does not repair Windows, change settings, install software, upload reports, use telemetry, provide remote support, guarantee that every problem will be found, or replace a qualified technician. Version 0.1.0-beta has no sensitive-data mode and no second supported diagnostic entry point.
+The diagnostic engine does not repair Windows, change settings, install software, upload reports, use telemetry, provide remote support, guarantee that every problem will be found, or replace a qualified technician. Version 0.1.0-beta has no sensitive-data mode and no second supported diagnostic entry point. The optional Easy Runner is a launcher only; it invokes the same diagnostic entry point.
 
 ## 6. Supported operating systems
 
@@ -30,15 +30,15 @@ You need Windows PowerShell 5.1 or later, Administrator privileges, working Wind
 
 ## 8. Files included in the download
 
-The public download contains the main script, its maintained internal native-process helper, public documentation, release and policy files, fictional examples, static tests, attribution files, and public audit summaries. It does not contain private runtime evidence, local-only audit evidence, or either unpublished legacy executable.
+The public download contains the main script, the optional `PCFC-Easy-Runner.ps1` convenience launcher, the maintained internal native-process helper, public documentation, release and policy files, fictional examples, static tests, attribution files, and public audit summaries. It does not contain private runtime evidence, local-only audit evidence, or either unpublished legacy executable.
 
 ## 9. Security and privacy notice
 
-Processing is local and the production path makes no network request. Privacy mode excludes documented direct identifiers and raw native output, but it is not anonymity. A report can still disclose hardware, software, driver, update, device, event, security, and storage details. Protect the output directory and review every file before sharing it.
+Core diagnostic processing is local and `PC-Full-Check.ps1` makes no network request. The optional Easy Runner uses HTTPS only to resolve and download an exact source snapshot from the official GitHub repository before local validation and execution; it does not upload diagnostic reports. Privacy mode excludes documented direct identifiers and raw native output, but it is not anonymity. A report can still disclose hardware, software, driver, update, device, event, security, and storage details. Protect the output directory and review every file before sharing it.
 
 ## 10. Downloading from GitHub
 
-On the official project page, select **Code**, then **Download ZIP**. Download only from a location you trust. This guide does not provide a repository URL because no official URL is recorded in version 0.1.0-beta metadata.
+For the direct offline-capable diagnostic path, select **Code**, then **Download ZIP** on the official project page, extract it, and invoke `PC-Full-Check.ps1` directly. For the easier network-assisted path, save `PCFC-Easy-Runner.ps1` from the official repository and run `powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1"`. The Easy Runner defaults to Standard mode, requests UAC if needed, resolves the official default branch to an exact commit SHA, downloads that exact source snapshot, validates it, runs repository tests, and then invokes `PC-Full-Check.ps1`.
 
 ## 11. Extracting the ZIP safely
 
@@ -46,7 +46,7 @@ Use File Explorer to open the downloaded ZIP, select **Extract all**, and choose
 
 ## 12. Opening Windows PowerShell as Administrator
 
-Open the Start menu, search for **Windows PowerShell**, right-click it, select **Run as administrator**, and accept the Windows confirmation prompt. The script checks Administrator membership and stops before creating a report if elevation is missing. It never auto-elevates itself.
+For direct execution, open the Start menu, search for **Windows PowerShell**, right-click it, select **Run as administrator**, and accept the Windows confirmation prompt. `PC-Full-Check.ps1` checks Administrator membership and stops before creating a report if elevation is missing; it does not auto-elevate itself. The optional Easy Runner is different: when saved as a `.ps1` file, it can request UAC and restart itself in native Windows PowerShell before invoking the same diagnostic engine.
 
 ## 13. Navigating to the project directory
 
@@ -108,7 +108,20 @@ The destination must not be a file, a non-empty directory, an unsafe escape from
 
 ## 19. Complete copy-paste examples
 
-Run these from the extracted project directory in Windows PowerShell as Administrator:
+Optional Easy Runner, Standard mode by default:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1"
+```
+
+Optional Easy Runner, explicit Quick or Full mode:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1" -Mode Quick
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1" -Mode Full
+```
+
+Direct diagnostic engine examples from the extracted project directory in Windows PowerShell as Administrator:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PC-Full-Check.ps1" -Mode Quick

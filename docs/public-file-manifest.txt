@@ -28,6 +28,7 @@ internal/ChkdskProduction.ps1
 legacy/README.md
 LICENSE
 PC-Full-Check.ps1
+PCFC-Easy-Runner.ps1
 PRIVACY.md
 README.md
 RELEASE_CHECKLIST.md
