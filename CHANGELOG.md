@@ -4,6 +4,18 @@ Creator and maintainer: Ayman Bounaouj
 
 All notable project changes are documented here.
 
+## Unreleased
+
+### Added
+
+- added `PCFC-Easy-Runner.ps1` as an optional convenience launcher while preserving `PC-Full-Check.ps1` as the only supported diagnostic entry point;
+- added exact-commit source acquisition from the official GitHub repository, native Windows PowerShell/UAC relaunch, per-user non-reparse workspace validation, public-manifest validation, repository-test execution, and local report opening;
+- documented the Easy Runner network boundary separately from the offline core diagnostic path.
+
+### Changed
+
+- updated privacy, security, README, user-guide, public-manifest, and static-test coverage for the optional launcher without altering the published `v0.1.0-beta` tag.
+
 ## 0.1.0-beta — 2026-08-02
 
 First public-beta source layout.

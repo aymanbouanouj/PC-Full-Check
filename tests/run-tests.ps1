@@ -11,6 +11,7 @@ param()
 $ErrorActionPreference = 'Stop'
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 $MainScript = Join-Path $ProjectRoot 'PC-Full-Check.ps1'
+$EasyRunnerPath = Join-Path $ProjectRoot 'PCFC-Easy-Runner.ps1'
 $ProductionScript = Join-Path $ProjectRoot 'internal\ChkdskProduction.ps1'
 $IntegratedValidatorPath = Join-Path $PSScriptRoot 'run-integrated-chkdsk-validation.ps1'
 $ManifestPath = Join-Path $ProjectRoot 'docs\public-file-manifest.txt'
@@ -62,6 +63,7 @@ if (-not (Test-Path -LiteralPath $MainScript -PathType Leaf)) {
 }
 
 $source = Get-Content -Raw -LiteralPath $MainScript
+$easyRunnerSource = if (Test-Path -LiteralPath $EasyRunnerPath -PathType Leaf) { Get-Content -Raw -LiteralPath $EasyRunnerPath } else { '' }
 $productionSource = if (Test-Path -LiteralPath $ProductionScript -PathType Leaf) { Get-Content -Raw -LiteralPath $ProductionScript } else { '' }
 $integratedValidatorSource = if (Test-Path -LiteralPath $IntegratedValidatorPath -PathType Leaf) { Get-Content -Raw -LiteralPath $IntegratedValidatorPath } else { '' }
 $localUsersBackslash = 'C:' + [char]92 + 'Users' + [char]92
@@ -76,7 +78,7 @@ $commandNames = @($ast.FindAll({ param($node) $node -is [System.Management.Autom
 Test-Case 'Main script parses without syntax errors' { return $parseErrors.Count -eq 0 }
 
 $requiredFiles = @(
-    'PC-Full-Check.ps1', 'README.md', 'LICENSE', 'CHANGELOG.md', 'AUTHORS.md', 'CITATION.cff',
+    'PC-Full-Check.ps1', 'PCFC-Easy-Runner.ps1', 'README.md', 'LICENSE', 'CHANGELOG.md', 'AUTHORS.md', 'CITATION.cff',
     'RELEASE_NOTES.md', 'RELEASE_CHECKLIST.md',
     'SECURITY.md', 'PRIVACY.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md',
     'BLOCKED_DECISIONS.md', '.gitignore', 'legacy\README.md',
@@ -386,13 +388,27 @@ Test-Case 'Documented process exit codes are implemented' {
     return $source -match 'exit 2' -and $source -notmatch 'exit 3' -and $source -match 'Get-CompletionExitCode' -and
         $source -match "Status 'Failed'\) -gt 0\) \{ return 1 \}" -and $source -match 'exit \$exitCode'
 }
-Test-Case 'PC-Full-Check.ps1 is the only supported public diagnostic entry point' {
+Test-Case 'PC-Full-Check.ps1 remains the only supported public diagnostic entry point' {
     $readme = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'README.md')
     $manifestScripts = @(Get-Content -LiteralPath $ManifestPath | Where-Object { $_ -match '\.ps1$' })
-    $diagnosticEntrypoints = @($manifestScripts | Where-Object { $_ -notmatch '^(?:tests|internal)/' })
+    $topLevelScripts = @($manifestScripts | Where-Object { $_ -notmatch '^(?:tests|internal)/' })
+    $diagnosticEntrypoints = @($topLevelScripts | Where-Object { $_ -ne 'PCFC-Easy-Runner.ps1' })
     return $diagnosticEntrypoints.Count -eq 1 -and $diagnosticEntrypoints[0] -ceq 'PC-Full-Check.ps1' -and
+        @($topLevelScripts | Where-Object { $_ -ceq 'PCFC-Easy-Runner.ps1' }).Count -eq 1 -and
         $readme -match [regex]::Escape('PC-Full-Check.ps1` is the only supported diagnostic entry point.') -and
+        $readme -match 'PCFC-Easy-Runner\.ps1.*optional convenience launcher' -and
         $source -match "Version: 0\.1\.0-beta"
+}
+Test-Case 'Optional Easy Runner preserves the documented network and diagnostic trust boundary' {
+    return (Test-Path -LiteralPath $EasyRunnerPath -PathType Leaf) -and
+        $easyRunnerSource -match '\[string\]\$Mode = ''Standard''' -and
+        $easyRunnerSource -match 'https://api\.github\.com/repos/aymanbouanouj/PC-Full-Check' -and
+        $easyRunnerSource -match "'/archive/'" -and
+        $easyRunnerSource -match 'tests\\run-tests\.ps1' -and
+        $easyRunnerSource -match 'PC-Full-Check\.ps1' -and
+        $easyRunnerSource -match 'ZIP trace SHA-256 \(not a signature\)' -and
+        $easyRunnerSource -notmatch '(?i)Upload(File|String)|Start-BitsTransfer|HttpClient|WebClient' -and
+        $easyRunnerSource -notmatch '(?i)-Method\s+(?:Post|Put|Patch|Delete)'
 }
 
 $assessmentTestPath = Join-Path $ProjectRoot 'tests\assessment-tests.ps1'

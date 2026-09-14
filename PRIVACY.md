@@ -1,6 +1,14 @@
 # Privacy policy and report handling
 
-PC Full Check for Windows processes data locally. It contains no upload, download, analytics, telemetry, or network-request feature. A report leaves the computer only if the user shares it through another tool.
+PC Full Check for Windows processes diagnostic data locally. The core diagnostic engine (`PC-Full-Check.ps1`) contains no upload, download, analytics, telemetry, or network-request feature. A diagnostic report leaves the computer only if the user shares it through another tool.
+
+## Optional Easy Runner network boundary
+
+`PCFC-Easy-Runner.ps1` is a convenience launcher, not a diagnostic collector. It uses HTTPS to contact the official GitHub repository and GitHub API only to resolve the repository's current default branch, resolve that branch to an exact commit SHA, and download that exact source snapshot before local validation and execution.
+
+The Easy Runner does not upload diagnostic reports, report contents, local hardware inventory, usernames, computer names, serials, network identifiers, or other diagnostic evidence to GitHub. It stores its downloaded source, test log, and generated reports in a per-user local workspace under `LOCALAPPDATA`. If that workspace is under a reparse point or cannot be validated as writable, the launcher fails instead of selecting a broader shared fallback directory.
+
+Users who require a strictly offline launch path should download and extract the repository separately and invoke `PC-Full-Check.ps1` directly.
 
 ## Privacy-only beta scope
 
