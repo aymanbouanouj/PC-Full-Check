@@ -34,6 +34,7 @@ README.md
 RELEASE_CHECKLIST.md
 RELEASE_NOTES.md
 SECURITY.md
+START_HERE.md
 tests/assessment-tests.ps1
 tests/chkdsk-tests.ps1
 tests/fixtures/quick-summary.json
