@@ -32,7 +32,7 @@ Version: 0.2.0-beta
 - [ ] Existing commit author-email privacy decision confirmed
 - [x] Comprehensive audit-report publication set selected: four public summaries; eight preserved outside public scope
 - [ ] Repository visibility confirmed
-- [ ] Explicit final staged diff reviewed
+- [x] Explicit final staged diff reviewed
 - [ ] Remote creation manually approved
 - [ ] GitHub push manually approved
 
