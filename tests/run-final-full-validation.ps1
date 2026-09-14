@@ -183,7 +183,7 @@ $validationPassed = $allRequiredFilesPresent -and $summaryParsed -and $privacyPa
 
 $validationRecord = [pscustomobject][ordered]@{
     Timestamp = [DateTime]::Now.ToString('o')
-    ToolVersion = '0.1.0-beta'
+    ToolVersion = '0.2.0-beta'
     Mode = 'Full'
     SensitiveDataIncluded = $false
     Command = 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\PC-Full-Check.ps1 -Mode Full -OutputPath .\local-validation\final-full'

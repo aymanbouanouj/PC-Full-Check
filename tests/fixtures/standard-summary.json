@@ -1,10 +1,10 @@
 {
   "FictionalFixture": true,
   "FixtureNotice": "FICTIONAL TEST FIXTURE - NOT A REAL COMPUTER REPORT",
-  "Tool": { "Name": "PC Full Check for Windows", "Version": "0.1.0-beta", "Author": "Ayman Bounaouj" },
+  "Tool": { "Name": "PC Full Check for Windows", "Version": "0.2.0-beta", "Author": "Ayman Bounaouj" },
   "GeneratedAt": "2030-01-15T11:30:00.0000000Z",
   "Mode": "Standard",
-  "Privacy": { "SensitiveDataIncluded": false, "State": "Privacy mode only (v0.1.0-beta)" },
+  "Privacy": { "SensitiveDataIncluded": false, "State": "Privacy mode only (v0.2.0-beta)" },
   "Assessment": "Attention required",
   "System": {
     "Windows": { "Caption": "Fictional Windows edition", "Version": "FICTIONAL", "BuildNumber": "FICTIONAL", "OSArchitecture": "Fictional architecture" },

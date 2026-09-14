@@ -2,14 +2,14 @@
   "SampleNotice": "FICTIONAL SANITIZED EXAMPLE - NOT A REAL COMPUTER REPORT",
   "Tool": {
     "Name": "PC Full Check for Windows",
-    "Version": "0.1.0-beta",
+    "Version": "0.2.0-beta",
     "Author": "Ayman Bounaouj"
   },
   "GeneratedAt": "2030-01-15T10:30:00.0000000Z",
   "Mode": "Quick",
   "Privacy": {
     "SensitiveDataIncluded": false,
-    "State": "Privacy mode only (v0.1.0-beta)"
+    "State": "Privacy mode only (v0.2.0-beta)"
   },
   "Assessment": "Attention required",
   "System": {

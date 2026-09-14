@@ -1,3 +1,49 @@
+# PC Full Check for Windows v0.2.0-beta
+
+Creator and maintainer: Ayman Bounaouj
+Copyright 2026 Ayman Bounaouj
+License: MIT
+
+## What changed since v0.1.0-beta
+
+This beta advances the public project while preserving the privacy-first, read-only diagnostic design.
+
+- Added the optional `PCFC-Easy-Runner.ps1` launcher for a simpler supported startup path.
+- Added `START_HERE.md`, a beginner-oriented guide covering setup, launch methods, diagnostic modes, reports, privacy, exit codes, and common mistakes.
+- Added GitHub Actions static validation for pull requests and repository changes.
+- Extended repository validation for the Easy Runner and current public documentation.
+- Preserved `PC-Full-Check.ps1` as the supported diagnostic engine.
+- Preserved Quick, Standard, and Full diagnostic modes.
+- Corrected the beginner documentation so `All` is not presented as a supported mode; users who need all three reports must run Quick, Standard, and Full separately.
+- Preserved the privacy-only design: the eight sensitive Full categories remain intentionally `Omitted`.
+- Preserved the read-only integrity operations: DISM `/CheckHealth`, SFC `/verifyonly`, and CHKDSK `/scan`.
+- The diagnostic engine still performs no report upload, telemetry, analytics, repair, or destructive action.
+- The optional Easy Runner uses HTTPS only to obtain the official repository source needed for launch and does not upload diagnostic reports.
+- The published `v0.1.0-beta` tag and its historical evidence remain unchanged.
+
+## Validation status
+
+Fresh local validation for `v0.2.0-beta` completed successfully on one current Windows computer.
+
+| Validation | Result |
+|---|---|
+| Repository suite | `TOTAL=78; PASSED=77; FAILED=0; NOT_EXECUTED=1` |
+| Quick runtime | Exit 0; 8 Passed, 1 Warning, 0 Failed |
+| Standard runtime | Exit 0; 17 Passed, 3 Warning, 0 Failed, 1 Unavailable |
+| Full release validator | Exit 0; elevated validation passed |
+| Quick privacy | 13 files; 0 confirmed; 0 potential review; 14 harmless/ignored |
+| Standard privacy | 25 files; 0 confirmed; 0 potential review; 540 harmless/ignored |
+| Full privacy | 28 files; 0 confirmed; 0 potential review; 540 harmless/ignored |
+
+Warnings and Unavailable results remain visible and are not converted to Passed. These results do not certify the computer or establish universal Windows compatibility.
+
+Local `v0.2.0-beta` validation is complete. Publication still requires final diff review, pull-request CI, merge into `main`, creation of the `v0.2.0-beta` tag, and GitHub Release publication.
+---
+
+# Historical release notes
+
+The complete original `v0.1.0-beta` release notes are preserved below without deletion or replacement.
+
 # PC Full Check for Windows v0.1.0-beta
 
 Creator and maintainer: Ayman Bounaouj

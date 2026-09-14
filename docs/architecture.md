@@ -36,7 +36,7 @@ An unsupported command or capability is `Unavailable`; an intentional privacy ex
 
 Collectors use property allowlists. Identifying CIM properties are not placed in maintained report objects, and event objects omit raw message text. The eight unsafe Full entries use fixed Omitted-only definitions with no native command or sensitive collector behind them.
 
-Stored output references are relative paths so a default Desktop location does not leak a user-profile path into the report. Exception details are replaced with controlled messages in the report and log. There is no sensitive-report execution path in v0.1.0-beta.
+Stored output references are relative paths so a default Desktop location does not leak a user-profile path into the report. Exception details are replaced with controlled messages in the report and log. There is no sensitive-report execution path in v0.2.0-beta.
 
 ## Native process boundary
 

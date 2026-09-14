@@ -1,6 +1,6 @@
 FICTIONAL SANITIZED EXAMPLE — NOT A REAL COMPUTER REPORT
 
-PC Full Check for Windows 0.1.0-beta
+PC Full Check for Windows 0.2.0-beta
 Author: Ayman Bounaouj
 Mode: Quick
 Privacy: Privacy mode

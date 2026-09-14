@@ -1,6 +1,6 @@
 # PC Full Check for Windows
 
-**Version 0.1.0-beta — public beta**
+**Version 0.2.0-beta — public beta**
 
 PC Full Check for Windows is a privacy-first, read-only Windows PowerShell diagnostic aid. It collects selected hardware, Windows, storage, battery, security, update, driver, and reliability evidence, then writes local HTML, JSON, text, and log reports with transparent statuses. The core diagnostic engine does not upload data, install dependencies, or repair the computer.
 
@@ -15,7 +15,7 @@ The core diagnostic script does not auto-elevate. The optional `PCFC-Easy-Runner
 
 ## Privacy and safety
 
-Version 0.1.0-beta is privacy-mode only. There is no public or hidden sensitive mode. Core diagnostic processing is local, with no network request, telemetry, analytics, or upload behavior in `PC-Full-Check.ps1`. The optional Easy Runner uses HTTPS only to resolve and download an exact source snapshot from the official GitHub repository; it does not upload diagnostic reports.
+Version 0.2.0-beta is privacy-mode only. There is no public or hidden sensitive mode. Core diagnostic processing is local, with no network request, telemetry, analytics, or upload behavior in `PC-Full-Check.ps1`. The optional Easy Runner uses HTTPS only to resolve and download an exact source snapshot from the official GitHub repository; it does not upload diagnostic reports.
 
 Privacy mode excludes documented direct identifiers and never saves raw localized integrity output. It reduces exposure but does not provide anonymity: reports can still reveal hardware, software, driver, update, device, event, security, and storage information. Review every report before sharing it.
 
@@ -23,7 +23,7 @@ The tool is read-only. Full mode uses DISM `/CheckHealth`, SFC `/verifyonly`, an
 
 ## Quick start
 
-**New to the project?** Start with the beginner-friendly [START_HERE.md](START_HERE.md) guide. It explains the one-paste launch path, Easy Runner commands, Quick/Standard/Full/All modes, report locations, privacy, exit codes, and common mistakes.
+**New to the project?** Start with the beginner-friendly [START_HERE.md](START_HERE.md) guide. It explains the one-paste launch path, Easy Runner commands, Quick/Standard/Full modes, report locations, privacy, exit codes, and common mistakes.
 
 ### Optional Easy Runner
 
@@ -33,7 +33,7 @@ For the easiest supported launch path, save `PCFC-Easy-Runner.ps1` as a `.ps1` f
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1"
 ```
 
-The Easy Runner defaults to Standard mode, requests UAC when needed, resolves the official repository's current default-branch commit, downloads that exact source snapshot over HTTPS, validates the public repository, runs the static repository tests, then invokes `PC-Full-Check.ps1`. Its network activity is limited to source acquisition from the official GitHub repository; diagnostic reports remain local. Use `-Mode Quick`, `-Mode Full`, or `-Mode All` only when those modes are specifically wanted.
+The Easy Runner defaults to Standard mode, requests UAC when needed, resolves the official repository's current default-branch commit, downloads that exact source snapshot over HTTPS, validates the public repository, runs the static repository tests, then invokes `PC-Full-Check.ps1`. Its network activity is limited to source acquisition from the official GitHub repository; diagnostic reports remain local. Use `-Mode Quick` or `-Mode Full` only when those modes are specifically wanted; `Standard` remains the default.
 
 ### Direct diagnostic engine
 

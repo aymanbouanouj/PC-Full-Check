@@ -10,7 +10,7 @@ PC Full Check for Windows was created and is maintained by **Ayman Bounaouj**. N
 
 ## 3. Current beta status
 
-The current version is **0.1.0-beta**. It has passing static tests and controlled runtime evidence on one current Windows computer, but it is not universally validated or professionally certified. Representative hardware, firmware, Windows edition, and localization coverage remains incomplete.
+The current version is **0.2.0-beta**. It has passing static tests and controlled runtime evidence on one current Windows computer, but it is not universally validated or professionally certified. Representative hardware, firmware, Windows edition, and localization coverage remains incomplete.
 
 ## 4. What the tool does
 
@@ -18,7 +18,7 @@ The tool checks selected Windows, manufacturer/model, processor, memory, display
 
 ## 5. What the tool does not do
 
-The diagnostic engine does not repair Windows, change settings, install software, upload reports, use telemetry, provide remote support, guarantee that every problem will be found, or replace a qualified technician. Version 0.1.0-beta has no sensitive-data mode and no second supported diagnostic entry point. The optional Easy Runner is a launcher only; it invokes the same diagnostic entry point.
+The diagnostic engine does not repair Windows, change settings, install software, upload reports, use telemetry, provide remote support, guarantee that every problem will be found, or replace a qualified technician. Version 0.2.0-beta has no sensitive-data mode and no second supported diagnostic entry point. The optional Easy Runner is a launcher only; it invokes the same diagnostic entry point.
 
 ## 6. Supported operating systems
 
@@ -305,7 +305,7 @@ Created and maintained by **Ayman Bounaouj**. PC Full Check for Windows is relea
 
 ## 53. Version information
 
-This guide describes PC Full Check for Windows **0.1.0-beta**. Check `RELEASE_NOTES.md` and `CHANGELOG.md` before using another version because modes, fields, checks, and limitations may change.
+This guide describes PC Full Check for Windows **0.2.0-beta**. Check `RELEASE_NOTES.md` and `CHANGELOG.md` before using another version because modes, fields, checks, and limitations may change.
 
 ## 54. Final safety reminder
 

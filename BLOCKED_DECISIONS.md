@@ -13,7 +13,7 @@
 - **Issue:** Native MSINFO32, DXDIAG, battery, sleep-study, sleep-diagnostics, and energy reports can include identifiers or user-related values, and reliable sanitization across supported Windows versions and localizations has not been verified.
 - **Why unresolved:** The project has no safe structured parser that guarantees removal of all prohibited fields.
 - **Missing evidence:** Representative reports across Windows 10/11 editions, languages, hardware types, and drivers, plus a reviewed allowlist parser.
-- **Safest current behavior:** Version 0.1.0-beta is privacy-only. Unsafe raw entries are fixed `Omitted` definitions, the public sensitive parameter was removed, and the maintained source contains no executable raw collector.
+- **Safest current behavior:** Version 0.2.0-beta is privacy-only. Unsafe raw entries are fixed `Omitted` definitions, the public sensitive parameter was removed, and the maintained source contains no executable raw collector.
 - **Manual follow-up:** Test representative raw reports privately before considering any sanitized derivative feature.
 
 ## Representative Windows hardware coverage
@@ -37,7 +37,7 @@
 - **Issue:** Sensitive-report collection has not been safely designed, sanitized, or validated.
 - **Why unresolved:** Raw files can expose direct identifiers, and representative privacy behavior is unverified.
 - **Missing evidence:** A reviewed design, robust allowlist sanitization, protected validation, and explicit release decision.
-- **Safest current behavior:** Sensitive-report collection is unavailable in v0.1.0-beta. The parameter and maintained collector implementations were removed, so this is not a public beta execution path.
+- **Safest current behavior:** Sensitive-report collection is unavailable in v0.2.0-beta. The parameter and maintained collector implementations were removed, so this is not a public beta execution path.
 - **Manual follow-up:** Treat any future sensitive feature as a separately reviewed release; do not re-enable the historical implementation.
 
 ## Git author-email privacy
@@ -59,7 +59,7 @@
 - **Issue:** The original internal executable predates the privacy-only public design and may contain raw or sensitive collection behavior.
 - **Decision:** Its source is deliberately unpublished and excluded from the public manifest. `PC-Full-Check.ps1` is the only supported public entry point.
 - **Historical record:** `legacy/README.md` retains only the baseline SHA-256 and safety context; it contains no legacy source and no execution instructions.
-- **Public boundary:** Sensitive-mode functionality remains unavailable in v0.1.0-beta. Users should not search for, request, or execute unofficial legacy copies.
+- **Public boundary:** Sensitive-mode functionality remains unavailable in v0.2.0-beta. Users should not search for, request, or execute unofficial legacy copies.
 
 ## Resolved on the current computer: remediated integrated CHKDSK production-path parity
 

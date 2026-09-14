@@ -6,16 +6,31 @@ All notable project changes are documented here.
 
 ## Unreleased
 
+## 0.2.0-beta — 2026-09-14
+
 ### Added
 
 - added `PCFC-Easy-Runner.ps1` as an optional convenience launcher while preserving `PC-Full-Check.ps1` as the only supported diagnostic entry point;
 - added exact-commit source acquisition from the official GitHub repository, native Windows PowerShell/UAC relaunch, per-user non-reparse workspace validation, public-manifest validation, repository-test execution, and local report opening;
 - documented the Easy Runner network boundary separately from the offline core diagnostic path.
+- added `START_HERE.md` as a beginner-oriented launch and usage guide.
+- added GitHub Actions static validation for repository changes and pull requests.
 
 ### Changed
 
 - updated privacy, security, README, user-guide, public-manifest, and static-test coverage for the optional launcher without altering the published `v0.1.0-beta` tag.
 
+### v0.2.0-beta validation evidence
+
+- fresh repository suite passed `TOTAL=78; PASSED=77; FAILED=0; NOT_EXECUTED=1`;
+- fresh Quick runtime completed with 8 Passed, 1 Warning, 0 Failed, 0 Unavailable, and 0 Omitted;
+- fresh Standard runtime completed with 17 Passed, 3 Warning, 0 Failed, 1 Unavailable, and 0 Omitted;
+- fresh elevated Full release validation completed successfully with exit code 0;
+- fresh privacy validation passed for Quick, Standard, and Full with zero confirmed findings and zero potential-review findings;
+- privacy scans covered 13 Quick files, 25 Standard files, and 28 Full files; harmless/ignored counts were 14, 540, and 540 respectively;
+- corrected beginner documentation so only Quick, Standard, and Full are presented as supported modes;
+- removed unsupported `-Mode All` instructions;
+- preserved the published `v0.1.0-beta` tag, historical release notes, and earlier validation chronology unchanged.
 ## 0.1.0-beta — 2026-08-02
 
 First public-beta source layout.

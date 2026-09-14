@@ -1,6 +1,6 @@
 # Public beta release checklist
 
-Version: 0.1.0-beta
+Version: 0.2.0-beta
 
 - [x] Repository tests pass
 - [x] Parser validation passes
@@ -8,6 +8,12 @@ Version: 0.1.0-beta
 - [x] Standard validation passed
 - [x] Full validation passed
 - [x] Privacy validation passed
+- [x] Fresh v0.2.0-beta repository suite: 78 total, 77 passed, 0 failed, 1 intentionally not executed
+- [x] Fresh v0.2.0-beta Quick runtime: exit 0, 8 Passed, 1 Warning, 0 Failed
+- [x] Fresh v0.2.0-beta Standard runtime: exit 0, 17 Passed, 3 Warning, 0 Failed, 1 Unavailable
+- [x] Fresh v0.2.0-beta elevated Full validator: exit 0
+- [x] Fresh Quick/Standard/Full privacy scans: 0 confirmed findings and 0 potential-review findings
+- [x] Documentation exposes only Quick, Standard, and Full as supported modes
 - [x] Integrated CHKDSK validation passed
 - [x] Remediated Quick, Standard, Full, and isolated shared CHKDSK paths passed on the current computer
 - [x] SleepStates report schema contains no raw localized output fields

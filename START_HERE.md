@@ -13,13 +13,13 @@ If you only want the shortest answer: use the **Easy Runner**. It can request Ad
 | Fast basic check | `Quick` | 9 | A quick overview |
 | Normal complete check | `Standard` | 21 | Most users |
 | Maximum available diagnostic scope | `Full` | 32 | Deeper troubleshooting |
-| Run every mode one after another | `All` | Quick + Standard + Full | Validation or comparison only |
+| Need separate reports from every supported mode | No single combined mode | Run Quick, Standard, and Full separately | Validation or comparison only |
 
 `Standard` is the default mode.
 
 `Full` includes the read-only Windows integrity checks **DISM `/CheckHealth`**, **SFC `/verifyonly`**, and **CHKDSK `/scan`**. Full mode also contains eight privacy-sensitive categories that are intentionally reported as `Omitted`; they are not executed in this release.
 
-`All` repeats overlapping checks because it runs Quick, Standard, and Full sequentially. Most users should use `Standard` or `Full` instead.
+There is no supported `All` mode. If you need separate Quick, Standard, and Full reports, run the three supported modes separately. Most users should use `Standard` or `Full` instead.
 
 ---
 
@@ -217,13 +217,15 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1" -Mode Full
 ```
 
-## All — run Quick, Standard, and Full sequentially
+## Run Quick, Standard, and Full separately
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1" -Mode All
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1" -Mode Quick
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1" -Mode Standard
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1" -Mode Full
 ```
 
-`All` is usually unnecessary because the modes overlap. It is mainly useful when you specifically need separate reports from all three modes.
+There is no supported `All` mode. Run Quick, Standard, and Full separately only when you specifically need separate reports from every supported mode.
 
 ## Do not open the HTML report automatically
 
@@ -442,7 +444,7 @@ I am troubleshooting, evaluating a used PC, or want the widest available diagnos
 → Full
 
 I specifically need three separate reports for Quick, Standard, and Full
-→ All
+→ Run Quick, Standard, and Full separately
 ```
 
 For most people, start with **Standard**. Use **Full** when you need the deepest supported diagnostic run.

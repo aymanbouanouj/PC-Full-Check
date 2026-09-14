@@ -268,7 +268,7 @@ Test-ChkdskRule 'Omitted raw entries have no executable collector in privacy-onl
     $before = $script:NativeCallCount
     foreach ($definition in $definitions) {
         $result = & $definition.Action $privacyContext
-        if ($result.Status -ne 'Omitted' -or $result.Message -notmatch 'unavailable in v0\.1\.0-beta') { return $false }
+        if ($result.Status -ne 'Omitted' -or $result.Message -notmatch 'unavailable in v0\.2\.0-beta') { return $false }
     }
     return $script:NativeCallCount -eq $before
 }
