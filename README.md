@@ -23,6 +23,8 @@ The tool is read-only. Full mode uses DISM `/CheckHealth`, SFC `/verifyonly`, an
 
 ## Quick start
 
+**New to the project?** Start with the beginner-friendly [START_HERE.md](START_HERE.md) guide. It explains the one-paste launch path, Easy Runner commands, Quick/Standard/Full/All modes, report locations, privacy, exit codes, and common mistakes.
+
 ### Optional Easy Runner
 
 For the easiest supported launch path, save `PCFC-Easy-Runner.ps1` as a `.ps1` file and run:
@@ -110,6 +112,7 @@ These results support the current beta on the validated computer. They do not ce
 
 ## Documentation
 
+- [Beginner start guide](START_HERE.md)
 - [Complete user guide](docs/USER_GUIDE.md)
 - [Privacy policy](PRIVACY.md)
 - [Security policy](SECURITY.md)
