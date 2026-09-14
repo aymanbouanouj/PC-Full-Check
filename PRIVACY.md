@@ -12,7 +12,7 @@ Users who require a strictly offline launch path should download and extract the
 
 ## Privacy-only beta scope
 
-Version 0.1.0-beta operates only in privacy mode. Sensitive-report collection is unavailable and cannot be enabled by a public or hidden parameter.
+Version 0.2.0-beta operates only in privacy mode. Sensitive-report collection is unavailable and cannot be enabled by a public or hidden parameter.
 
 The original internal executable source predates this boundary and is deliberately unpublished. Unofficial legacy copies are not supported and should not be requested or executed.
 

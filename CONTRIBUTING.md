@@ -14,7 +14,7 @@ Thank you for helping improve PC Full Check for Windows.
 - Keep all diagnostics read-only.
 - Preserve privacy mode as the default.
 - Select safe properties during collection instead of collecting everything for later redaction.
-- Keep sensitive commands and raw-report collection unavailable in v0.1.0-beta. Any such capability requires a separately designed, reviewed, and validated future release.
+- Keep sensitive commands and raw-report collection unavailable in v0.2.0-beta. Any such capability requires a separately designed, reviewed, and validated future release.
 - Resolve supported native executables from the trusted Windows system directory, add sensible timeouts, and capture safe process, exit, and stream-presence metadata.
 - Record missing capability as `Unavailable` and intentional privacy exclusions as `Omitted`.
 - Do not use missing telemetry as proof of health.

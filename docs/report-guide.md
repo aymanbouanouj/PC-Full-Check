@@ -16,7 +16,7 @@ Passed describes the implemented check contract, not a professional certificatio
 
 There is no hidden score.
 
-1. **Critical** is used only when a result has an explicit critical flag for a verified serious condition. In 0.1.0-beta, this is limited to a physical disk whose Windows `HealthStatus` is explicitly `Unhealthy`.
+1. **Critical** is used only when a result has an explicit critical flag for a verified serious condition. In 0.2.0-beta, this is limited to a physical disk whose Windows `HealthStatus` is explicitly `Unhealthy`.
 2. **Attention required** is used when one or more checks have Warning status and no Critical condition exists.
 3. **Unknown** is used when a check failed without a verified critical condition, or when an essential check did not complete with Passed or Warning status.
 4. **Good** is used only when all essential checks completed with Passed or Warning, no Warning exists, no check Failed, and no Critical condition exists.
@@ -74,6 +74,6 @@ The report records the requested start time plus the earliest and latest observe
 
 ## Privacy and sharing
 
-Version 0.1.0-beta is privacy-mode only. Sensitive-report collection is unavailable, and the eight unsafe raw Full categories are fixed Omitted entries with no executable collector.
+Version 0.2.0-beta is privacy-mode only. Sensitive-report collection is unavailable, and the eight unsafe raw Full categories are fixed Omitted entries with no executable collector.
 
 Privacy mode avoids the documented direct identifiers but is not an anonymity guarantee or automatic publication sanitizer. Hardware manufacturer/model, component names, driver inventory, installed-program inventory, update identifiers, and System-event metadata or diagnostic descriptions remain useful report content. They are not direct personal identifiers by themselves, but they can reveal computer details and should be reviewed before sharing. Report processing is local, and the script does not upload reports.

@@ -5,7 +5,7 @@ Runs a privacy-first, read-only Windows diagnostic collection.
 .DESCRIPTION
 PC Full Check for Windows collects selected hardware, Windows, storage,
 battery, security, and reliability information and creates local HTML and
-JSON summaries. Privacy mode is the only mode in v0.1.0-beta. The script never repairs or
+JSON summaries. Privacy mode is the only mode in v0.2.0-beta. The script never repairs or
 changes the computer and never uploads a report.
 
 .PARAMETER Mode
@@ -31,7 +31,7 @@ None.
 Local HTML, JSON, text, and log files in the selected report directory.
 
 .NOTES
-Version: 0.1.0-beta
+Version: 0.2.0-beta
 Author: Ayman Bounaouj
 Copyright 2026 Ayman Bounaouj
 Requires Windows 10 or Windows 11, PowerShell 5.1 or later, and Administrator
@@ -49,7 +49,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $ToolName = 'PC Full Check for Windows'
-$ToolVersion = '0.1.0-beta'
+$ToolVersion = '0.2.0-beta'
 $Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 $SupportedStatuses = @('Passed', 'Warning', 'Failed', 'Unavailable', 'Omitted')
 $ChkdskProductionPath = Join-Path $PSScriptRoot 'internal\ChkdskProduction.ps1'
@@ -280,7 +280,7 @@ function New-PrivacyOnlyOmittedDefinition {
 
     return New-Definition -Name $Name -DisplayName $DisplayName -ProgressText $ProgressText -PrivacyProgressText $ProgressText -Action {
         param($Context)
-        New-CheckOutcome -Status Omitted -Message 'Omitted in privacy mode; sensitive-report collection is unavailable in v0.1.0-beta.'
+        New-CheckOutcome -Status Omitted -Message 'Omitted in privacy mode; sensitive-report collection is unavailable in v0.2.0-beta.'
     }
 }
 
@@ -822,7 +822,7 @@ function New-SummaryObject {
         Tool = [pscustomobject][ordered]@{ Name = $script:ToolName; Version = $script:ToolVersion; Author = 'Ayman Bounaouj' }
         GeneratedAt = [DateTime]::Now.ToString('o')
         Mode = $Context.Mode
-        Privacy = [pscustomobject][ordered]@{ SensitiveDataIncluded = $false; State = 'Privacy mode only (v0.1.0-beta)' }
+        Privacy = [pscustomobject][ordered]@{ SensitiveDataIncluded = $false; State = 'Privacy mode only (v0.2.0-beta)' }
         Assessment = Get-Assessment -Context $Context
         System = [pscustomobject][ordered]@{
             Windows = $windows

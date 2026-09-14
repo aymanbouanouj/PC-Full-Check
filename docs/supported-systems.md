@@ -2,7 +2,7 @@
 
 ## Public support statement
 
-The 0.1.0-beta public support scope is:
+The 0.2.0-beta public support scope is:
 
 - Windows 10;
 - Windows 11;
@@ -26,7 +26,7 @@ The startup guard stops on other operating systems, unsupported Windows captions
 | Sleep and power | `powercfg.exe` | Supported power capabilities |
 | Events and WHEA | System event log | Log access, providers, retained events |
 | Integrity checks | DISM, SFC, CHKDSK | Built-in executables and Administrator access |
-| Raw Full reports | Not collected in v0.1.0-beta | Always Omitted in privacy-only scope |
+| Raw Full reports | Not collected in v0.2.0-beta | Always Omitted in privacy-only scope |
 
 Capability absence is reported as `Unavailable`; privacy exclusions are `Omitted`. The tool does not imply that every check works on every supported computer.
 
