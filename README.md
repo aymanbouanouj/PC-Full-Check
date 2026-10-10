@@ -123,6 +123,17 @@ These results support the current beta on the validated computer. They do not ce
 
 The original unpublished executable is not part of this repository and is not a supported entry point. `PC-Full-Check.ps1` is the only supported diagnostic entry point. `PCFC-Easy-Runner.ps1` is an optional convenience launcher that acquires and validates the official source before invoking that diagnostic entry point; it is not a second diagnostic engine. See [the source-free legacy integrity record](legacy/README.md).
 
+## Citation and archival
+
+[![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23273476.svg)](https://doi.org/10.5281/zenodo.23273476)
+
+- **Specific archived release:** [v0.2.0-beta on Zenodo](https://doi.org/10.5281/zenodo.23273477) — cite this DOI when referring to the exact `v0.2.0-beta` source archive.
+- **All archived versions:** [Zenodo concept DOI](https://doi.org/10.5281/zenodo.23273476) — resolves to the latest version archived under this Zenodo record.
+- **Original GitHub release:** [v0.2.0-beta](https://github.com/aymanbouanouj/PC-Full-Check/releases/tag/v0.2.0-beta).
+- **Author ORCID:** [0009-0001-6071-9418](https://orcid.org/0009-0001-6071-9418).
+
+For citation metadata, see [CITATION.cff](CITATION.cff). The project remains licensed under MIT; Zenodo archival does not change the software license or historical Git tags.
+
 ## Author
 
 Created and maintained by **Ayman Bounaouj**.

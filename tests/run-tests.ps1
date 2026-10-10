@@ -524,7 +524,7 @@ Test-Case 'Public authorship metadata consistently names Ayman Bounaouj' {
     }
     return $true
 }
-Test-Case 'CITATION.cff has safe CFF 1.2 author structure' {
+Test-Case 'CITATION.cff has safe CFF 1.2 author structure and Zenodo metadata' {
     $citation = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'CITATION.cff')
     return $citation -notmatch "`t" -and
         $citation -match '(?m)^cff-version: 1\.2\.0\s*$' -and
@@ -532,8 +532,12 @@ Test-Case 'CITATION.cff has safe CFF 1.2 author structure' {
         $citation -match '(?m)^title: "PC Full Check for Windows"\s*$' -and
         $citation -match '(?m)^version: "0\.2\.0-beta"\s*$' -and
         $citation -match '(?m)^type: software\s*$' -and
-        $citation -match '(?m)^authors:\s*\r?\n  - family-names: "Bounaouj"\s*\r?\n    given-names: "Ayman"\s*$' -and
-        $citation -notmatch '(?im)^\s*(?:email|doi|repository-code|url):'
+        $citation -match '(?m)^authors:\r?\n  - family-names: "Bounaouj"\r?\n    given-names: "Ayman"\r?\n    orcid: "https://orcid\.org/0009-0001-6071-9418"\s*$' -and
+        $citation -match '(?m)^doi: "10\.5281/zenodo\.23273477"\s*$' -and
+        $citation -match '(?m)^repository-code: "https://github\.com/aymanbouanouj/PC-Full-Check"\s*$' -and
+        $citation -match '(?m)^license: MIT\s*$' -and
+        $citation -match '(?m)^date-released: 2026-09-14\s*$' -and
+        $citation -notmatch '(?im)^\s*(?:email|url):'
 }
 Test-Case 'Configured Git email does not appear in any public file' {
     if ($null -eq (Get-Command git -ErrorAction SilentlyContinue)) { return $true }
