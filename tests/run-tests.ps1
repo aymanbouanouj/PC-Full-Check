@@ -594,7 +594,7 @@ Test-Case 'Public authorship metadata consistently names Ayman Bounaouj' {
     }
     return $true
 }
-Test-Case 'CITATION.cff has current release metadata and no unassigned version DOI' {
+Test-Case 'CITATION.cff cites the issued v0.2.1-beta Zenodo version DOI' {
     $citation = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'CITATION.cff')
     return $citation -notmatch "`t" -and
         $citation -match '(?m)^cff-version: 1\.2\.0\s*$' -and
@@ -603,7 +603,7 @@ Test-Case 'CITATION.cff has current release metadata and no unassigned version D
         $citation -match '(?m)^version: "0\.2\.1-beta"\s*$' -and
         $citation -match '(?m)^type: software\s*$' -and
         $citation -match '(?m)^authors:\r?\n  - family-names: "Bounaouj"\r?\n    given-names: "Ayman"\r?\n    orcid: "https://orcid\.org/0009-0001-6071-9418"\s*$' -and
-        $citation -notmatch '(?m)^doi:' -and
+        $citation -match '(?m)^doi: "10\.5281/zenodo\.23839790"\s*$' -and
         $citation -match '(?m)^repository-code: "https://github\.com/aymanbouanouj/PC-Full-Check"\s*$' -and
         $citation -match '(?m)^license: MIT\s*$' -and
         $citation -match '(?m)^date-released: 2026-10-31\s*$' -and

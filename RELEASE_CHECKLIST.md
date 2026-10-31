@@ -7,11 +7,13 @@ Target release date: 2026-10-31
 - [x] Security hardening merged in PR #7
 - [x] Elevated Quick mode tested on one Windows computer (reported exit 0; reports existed and JSON parsed)
 - [ ] New locked source snapshot accepted, and tested on Windows
-- [ ] Fresh release-candidate static CI passes with zero failures
-- [ ] Main merge commit passes post-merge GitHub Actions CI
-- [ ] Version v0.2.1-beta tag created for immutable merge commit
-- [ ] GitHub Release marked as prerelease and published
-- [ ] New Zenodo version deposited and new DOI recorded (do not reuse v0.2.0-beta DOI)
+- [x] Fresh release-candidate static CI passes with zero failures (79 total, 78 passed, 0 failed, 1 intentionally not executed)
+- [x] Main merge commit passes post-merge GitHub Actions CI
+- [x] Version v0.2.1-beta tag created for immutable merge commit
+- [x] GitHub Release marked as prerelease and published
+- [x] New Zenodo version record published with independent DOI 10.5281/zenodo.23839790 (historical v0.2.0-beta DOI unchanged)
+- [ ] Verify that Zenodo's semantic Version metadata reads `v0.2.1-beta` rather than the currently displayed `v2`
+- [ ] Independently compare the Zenodo ZIP contents against the exact GitHub `v0.2.1-beta` tag (reported Zenodo MD5: `1b7d2a0a4b47336392aa93a2759bd561`)
 
 No new automatic Full-mode diagnostics are requested. The bootstrap launcher still requires independent trust.
 

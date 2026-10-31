@@ -128,12 +128,12 @@ The original unpublished executable is not part of this repository and is not a 
 [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23273476.svg)](https://doi.org/10.5281/zenodo.23273476)
 
 - **Previous archived release:** [v0.2.0-beta on Zenodo](https://doi.org/10.5281/zenodo.23273477) — this DOI applies ONLY to historical `v0.2.0-beta`, not the current maintenance beta.
-- **Current v0.2.1-beta:** a separate Zenodo version DOI has not yet been assigned. Do not cite the historical version DOI for this release.
+- **Current archived release:** [v0.2.1-beta on Zenodo](https://doi.org/10.5281/zenodo.23839790) — cite this DOI for the exact `v0.2.1-beta` archive.
 - **All Zenodo-archived versions:** [Zenodo concept DOI](https://doi.org/10.5281/zenodo.23273476) — resolves to the newest version actually deposited on Zenodo, which may differ from the newest GitHub release.
-- **Original GitHub release:** [v0.2.0-beta](https://github.com/aymanbouanouj/PC-Full-Check/releases/tag/v0.2.0-beta).
+- **GitHub release:** [v0.2.1-beta](https://github.com/aymanbouanouj/PC-Full-Check/releases/tag/v0.2.1-beta) ([historical v0.2.0-beta](https://github.com/aymanbouanouj/PC-Full-Check/releases/tag/v0.2.0-beta)).
 - **Author ORCID:** [0009-0001-6071-9418](https://orcid.org/0009-0001-6071-9418).
 
-For current citation metadata, see [CITATION.cff](CITATION.cff), which intentionally omits an unassigned current-version DOI. The project remains MIT-licensed; historical Git tags and Zenodo archives are unaffected.
+For current citation metadata, see [CITATION.cff](CITATION.cff), which records the published `v0.2.1-beta` version DOI. The project remains MIT-licensed; historical Git tags and Zenodo archives are unaffected.
 
 ## Author
 
