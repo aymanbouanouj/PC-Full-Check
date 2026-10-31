@@ -16,9 +16,9 @@ Output paths are canonicalized, checked for inspected reparse points, constraine
 
 ## Optional Easy Runner trust boundary
 
-The Easy Runner is intentionally separate from the diagnostic engine. It resolves the official repository's default branch through the GitHub API, resolves that branch to a 40-character commit SHA, downloads the archive for that exact commit over HTTPS, validates required repository files and the public manifest, parses maintained PowerShell files, and runs `tests/run-tests.ps1` before starting a diagnostic.
+The Easy Runner is intentionally separate from the diagnostic engine. It downloads the reviewed, pinned `v0.2.0-beta` commit `07839dcdf8541a8e1fb691da4b34a61966c82b3b`, rather than automatically trusting the latest default branch. Before running any downloaded scripts or tests, it validates embedded SHA-256 hashes for **all** PowerShell scripts and the public-file manifest from that approved commit, rejects missing or unexpected public files and untrusted scripts, and rejects reparse points. Only then does it parse maintained scripts and execute the downloaded repository tests.
 
-The ZIP SHA-256 printed by the launcher is a local trace hash, not a digital signature or independent authenticity proof. The launcher does not use the hash as a substitute for HTTPS or repository trust. It does not use Git, does not install dependencies, does not remove Mark-of-the-Web from downloaded files, and does not upload generated reports.
+The runner's ZIP SHA-256 display remains a trace hash, not a signature. The **fixed SHA-256 reference hashes embedded in a previously trusted launcher** form the integrity trust anchor for executable downloaded files. A compromised initial launcher download remains outside that trust boundary; this is not a signed-release mechanism or blanket assurance against all supply-chain attacks. Other non-executable public documents are inventory-checked against the SHA-256-verified manifest but not individually hashed. Releases must be deliberately reviewed and re-pinned to update the trusted source. HTTPS transport remains required. No Git installation, network uploads, or diagnostic repairs are introduced.
 
 ## Reporting a security issue
 

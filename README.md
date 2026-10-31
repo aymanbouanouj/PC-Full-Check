@@ -33,7 +33,7 @@ For the easiest supported launch path, save `PCFC-Easy-Runner.ps1` as a `.ps1` f
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1"
 ```
 
-The Easy Runner defaults to Standard mode, requests UAC when needed, resolves the official repository's current default-branch commit, downloads that exact source snapshot over HTTPS, validates the public repository, runs the static repository tests, then invokes `PC-Full-Check.ps1`. Its network activity is limited to source acquisition from the official GitHub repository; diagnostic reports remain local. Use `-Mode Quick` or `-Mode Full` only when those modes are specifically wanted; `Standard` remains the default.
+The Easy Runner defaults to Standard mode and requests UAC when needed. For security, this launcher **pins the reviewed `v0.2.0-beta` source commit** (`07839dcdf8541a8e1fb691da4b34a61966c82b3b`) instead of automatically following `main`. It downloads that exact source snapshot over HTTPS, compares every downloaded PowerShell script and the public file manifest against SHA-256 values embedded in the launcher, rejects unexpected or missing files, then runs repository tests and invokes `PC-Full-Check.ps1`. This trust policy protects an **already trusted local copy of the launcher**; downloading a compromised launcher itself is outside this guarantee. Updating the trusted source requires a reviewed launcher update. Diagnostic reports remain local. Use `-Mode Quick` or `-Mode Full` only when needed; `Standard` remains the default.
 
 ### Direct diagnostic engine
 

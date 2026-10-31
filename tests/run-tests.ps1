@@ -402,13 +402,83 @@ Test-Case 'PC-Full-Check.ps1 remains the only supported public diagnostic entry 
 Test-Case 'Optional Easy Runner preserves the documented network and diagnostic trust boundary' {
     return (Test-Path -LiteralPath $EasyRunnerPath -PathType Leaf) -and
         $easyRunnerSource -match '\[string\]\$Mode = ''Standard''' -and
-        $easyRunnerSource -match 'https://api\.github\.com/repos/aymanbouanouj/PC-Full-Check' -and
+        $easyRunnerSource -match [regex]::Escape('$PinnedSourceCommit = ''07839dcdf8541a8e1fb691da4b34a61966c82b3b''') -and
         $easyRunnerSource -match "'/archive/'" -and
         $easyRunnerSource -match 'tests\\run-tests\.ps1' -and
         $easyRunnerSource -match 'PC-Full-Check\.ps1' -and
         $easyRunnerSource -match 'ZIP trace SHA-256 \(not a signature\)' -and
+        $easyRunnerSource -match 'Test-PCFCPinnedSource -RepositoryDirectory \$repositoryDirectory' -and
+        $easyRunnerSource -notmatch 'Invoke-PCFCGitHubRestGet' -and
         $easyRunnerSource -notmatch '(?i)Upload(File|String)|Start-BitsTransfer|HttpClient|WebClient' -and
         $easyRunnerSource -notmatch '(?i)-Method\s+(?:Post|Put|Patch|Delete)'
+}
+
+
+Test-Case 'Pinned-source integrity verifies fixtures and rejects modified, missing, and unexpected content' {
+    # Extract ONLY the validator function without running the Easy Runner script.
+    $tokens = $null
+    $parseErrors = $null
+    $ast = [System.Management.Automation.Language.Parser]::ParseInput(
+        $easyRunnerSource, [ref]$tokens, [ref]$parseErrors
+    )
+    if (@($parseErrors).Count -gt 0) { return $false }
+
+    $definitions = @($ast.FindAll({
+        param($node)
+        $node -is [System.Management.Automation.Language.FunctionDefinitionAst] -and
+        $node.Name -eq 'Test-PCFCPinnedSource'
+    }, $true))
+    if ($definitions.Count -ne 1) { return $false }
+    . ([scriptblock]::Create($definitions[0].Extent.Text))
+
+    $fixtureRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('pcfc-source-trust-' + [Guid]::NewGuid().ToString('N'))
+    [void](New-Item -ItemType Directory -Path $fixtureRoot -ErrorAction Stop)
+
+    try {
+        $docs = Join-Path $fixtureRoot 'docs'
+        [void](New-Item -ItemType Directory -Path $docs -ErrorAction Stop)
+        $file = Join-Path $fixtureRoot 'trusted.ps1'
+        $manifest = Join-Path $docs 'public-file-manifest.txt'
+        $encoding = New-Object System.Text.UTF8Encoding($false)
+        [System.IO.File]::WriteAllText($file, '# fictional safe fixture', $encoding)
+        [System.IO.File]::WriteAllText($manifest, "trusted.ps1`ndocs/public-file-manifest.txt`n", $encoding)
+
+        $expected = @{
+            'trusted.ps1' = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash
+            'docs/public-file-manifest.txt' = (Get-FileHash -LiteralPath $manifest -Algorithm SHA256).Hash
+        }
+
+        try {
+            Test-PCFCPinnedSource -RepositoryDirectory $fixtureRoot -ExpectedHashes $expected
+        }
+        catch { return $false }
+
+        [System.IO.File]::WriteAllText($file, '# modified fixture', $encoding)
+        $tamperingRejected = $false
+        try { Test-PCFCPinnedSource -RepositoryDirectory $fixtureRoot -ExpectedHashes $expected }
+        catch { $tamperingRejected = $true }
+        if (-not $tamperingRejected) { return $false }
+
+        [System.IO.File]::WriteAllText($file, '# fictional safe fixture', $encoding)
+        $unexpected = Join-Path $fixtureRoot 'untrusted.ps1'
+        [System.IO.File]::WriteAllText($unexpected, '# should be rejected', $encoding)
+        $extraRejected = $false
+        try { Test-PCFCPinnedSource -RepositoryDirectory $fixtureRoot -ExpectedHashes $expected }
+        catch { $extraRejected = $true }
+        if (-not $extraRejected) { return $false }
+
+        Remove-Item -LiteralPath $unexpected -Force -ErrorAction Stop
+        Remove-Item -LiteralPath $file -Force -ErrorAction Stop
+        $missingRejected = $false
+        try { Test-PCFCPinnedSource -RepositoryDirectory $fixtureRoot -ExpectedHashes $expected }
+        catch { $missingRejected = $true }
+        return $missingRejected
+    }
+    finally {
+        if (Test-Path -LiteralPath $fixtureRoot -PathType Container) {
+            Remove-Item -LiteralPath $fixtureRoot -Recurse -Force -ErrorAction Stop
+        }
+    }
 }
 
 $assessmentTestPath = Join-Path $ProjectRoot 'tests\assessment-tests.ps1'

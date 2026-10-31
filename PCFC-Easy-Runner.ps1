@@ -6,9 +6,10 @@
 
 .DESCRIPTION
     PCFC-Easy-Runner.ps1 is a convenience launcher, not a second diagnostic engine.
-    It contacts the official GitHub repository to resolve the current default-branch
-    commit, downloads that exact source snapshot, validates the public repository,
-    runs the repository test suite, then invokes PC-Full-Check.ps1.
+    It downloads the explicitly pinned v0.2.0-beta commit source, verifies
+    trusted SHA-256 values for every downloaded PowerShell script and the public
+    file manifest before executing downloaded tests or diagnostics, and then
+    invokes PC-Full-Check.ps1. Updating the pinned source requires code review.
 
     Diagnostic reports stay local. The launcher does not upload diagnostic output.
 
@@ -35,8 +36,23 @@ $ErrorActionPreference = 'Stop'
 $RepositoryOwner = 'aymanbouanouj'
 $RepositoryName = 'PC-Full-Check'
 $RepositoryUrl = 'https://github.com/aymanbouanouj/PC-Full-Check'
-$RepositoryApi = 'https://api.github.com/repos/aymanbouanouj/PC-Full-Check'
 $RunnerDirectoryName = 'PC-Full-Check-Runner'
+
+# Deliberately approved source snapshot. Update this lock only after reviewing
+# a future release's complete executable sources and tests.
+$PinnedSourceCommit = '07839dcdf8541a8e1fb691da4b34a61966c82b3b'
+$TrustedSourceHashes = @{
+    'PC-Full-Check.ps1' = 'c59d28c3557b779f2f00f0c9716d0e1ca9021793850a536e7c4055c5c838ff2f'
+    'PCFC-Easy-Runner.ps1' = '9d93f9607f18cab2a1dff382553fd7fc9495234e7571083ede4b4af5c36210b2'
+    'internal/ChkdskProduction.ps1' = '6bbffc58251523c8145409e1f30e24d1ae9ad9a5c249ba67ebccd667cf4b8ea7'
+    'tests/assessment-tests.ps1' = '05d715a6d27156e1c696c5e5d0477e60f3f188d20434047a39eb7605ecc20de3'
+    'tests/chkdsk-tests.ps1' = 'd8ffb313bb035ea2ed4e85cbfd5a1ca1ebdcb1a59bb6bafe707869287947a4ca'
+    'tests/privacy-validation.ps1' = '21002c2b5090957c538b5288ef95f2a1c5e67dc69770cf70332ae145b45ccc6f'
+    'tests/run-final-full-validation.ps1' = 'f15856d89def7d7a499e0cb9b907075da82b1f8dacb475a1561c4c5a1b7b0312'
+    'tests/run-integrated-chkdsk-validation.ps1' = '1c719775a778c1c6f3a1a2bd76d54faf17d08dd637cf54b691766197674bac3d'
+    'tests/run-tests.ps1' = 'f3575b8f052dfccfca41b5dd2e65d4e5b8741917080adabe878475ac81733785'
+    'docs/public-file-manifest.txt' = '4675729d38a92e02ad57acaa4837b54fc04470afebdbaab097e4f5e744cf1625'
+}
 
 function Write-PCFCSection {
     param(
@@ -239,22 +255,92 @@ function Test-PowerShellFileParses {
     }
 }
 
-function Invoke-PCFCGitHubRestGet {
+function Test-PCFCPinnedSource {
     param(
         [Parameter(Mandatory = $true)]
-        [string]$Uri
+        [string]$RepositoryDirectory,
+
+        [Parameter(Mandatory = $true)]
+        [hashtable]$ExpectedHashes
     )
 
-    $headers = @{
-        'User-Agent' = 'PC-Full-Check-Easy-Runner'
-        'Accept' = 'application/vnd.github+json'
+    # The trusted manifest is embedded in the launcher, never loaded from the ZIP.
+    # It protects executable scripts and the allowlist; other documents are
+    # restricted by the authenticated public-file manifest's file inventory.
+    $root = [System.IO.Path]::GetFullPath($RepositoryDirectory).TrimEnd([char]'\')
+
+    if (-not (Test-Path -LiteralPath $root -PathType Container)) {
+        throw 'Trusted source validation: repository directory is missing.'
     }
 
-    return Invoke-RestMethod `
-        -Uri $Uri `
-        -Headers $headers `
-        -Method Get `
-        -ErrorAction Stop
+    foreach ($path in $ExpectedHashes.Keys) {
+        if ($path -notmatch '^[a-zA-Z0-9_.\-/]+$' -or $path -match '(^|/)\.\.(/|$)') {
+            throw ('Trusted source validation: invalid locked path: ' + $path)
+        }
+
+        $absolute = Join-Path $root ($path -replace '/', '\')
+
+        if (-not (Test-Path -LiteralPath $absolute -PathType Leaf)) {
+            throw ('Trusted source validation: required file missing: ' + $path)
+        }
+
+        $item = Get-Item -LiteralPath $absolute -Force -ErrorAction Stop
+        if (($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw ('Trusted source validation: reparse point rejected: ' + $path)
+        }
+
+        $actualHash = (Get-FileHash -LiteralPath $absolute -Algorithm SHA256 -ErrorAction Stop).Hash
+        if (-not [string]::Equals($actualHash, [string]$ExpectedHashes[$path], [StringComparison]::OrdinalIgnoreCase)) {
+            throw ('Trusted source validation: SHA-256 mismatch: ' + $path)
+        }
+    }
+
+    # The on-disk manifest has been verified above against an embedded SHA-256.
+    $manifest = Join-Path $root 'docs\public-file-manifest.txt'
+    $listed = @(
+        Get-Content -LiteralPath $manifest -ErrorAction Stop |
+            Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    )
+    $approved = @{}
+
+    foreach ($path in $listed) {
+        $normalized = $path.Trim().Replace('\', '/')
+        if (
+            $normalized -notmatch '^[a-zA-Z0-9_.\-/]+$' -or
+            $normalized -match '(^|/)\.\.(/|$)' -or
+            $approved.ContainsKey($normalized)
+        ) {
+            throw ('Trusted source validation: invalid or duplicate manifest path: ' + $normalized)
+        }
+        $approved[$normalized] = $true
+    }
+
+    $allItems = @(Get-ChildItem -LiteralPath $root -Recurse -Force -ErrorAction Stop)
+    $observed = @{}
+
+    foreach ($item in $allItems) {
+        if (($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw ('Trusted source validation: reparse point rejected: ' + $item.FullName)
+        }
+
+        if ($item.PSIsContainer) { continue }
+
+        $relative = $item.FullName.Substring($root.Length + 1).Replace('\', '/')
+        if (-not $approved.ContainsKey($relative)) {
+            throw ('Trusted source validation: unexpected file: ' + $relative)
+        }
+
+        # No newly introduced scripts can be executed via a compromised archive.
+        if ($relative -match '\.ps1$' -and -not $ExpectedHashes.ContainsKey($relative)) {
+            throw ('Trusted source validation: untrusted PowerShell script: ' + $relative)
+        }
+
+        $observed[$relative] = $true
+    }
+
+    if ($observed.Count -ne $approved.Count) {
+        throw 'Trusted source validation: public manifest inventory is incomplete.'
+    }
 }
 
 function Invoke-PCFCDownload {
@@ -283,41 +369,16 @@ function Invoke-PCFCDownload {
 }
 
 function Get-PCFCRepositorySnapshot {
-    Write-PCFCInfo 'Resolving the official repository default branch...'
+    Write-PCFCInfo 'Using the reviewed, pinned v0.2.0-beta source commit.'
+    Write-PCFCInfo 'Automatic default-branch updates are intentionally disabled.'
 
-    $repositoryInfo = Invoke-PCFCGitHubRestGet -Uri $RepositoryApi
-
-    $defaultBranch = [string]$repositoryInfo.default_branch
-
-    if ([string]::IsNullOrWhiteSpace($defaultBranch)) {
-        throw 'GitHub did not return a default branch.'
-    }
-
-    $escapedBranch = [Uri]::EscapeDataString($defaultBranch)
-
-    Write-PCFCInfo (
-        'Resolving the exact commit for default branch: ' +
-        $defaultBranch
-    )
-
-    $commitInfo = Invoke-PCFCGitHubRestGet `
-        -Uri ($RepositoryApi + '/commits/' + $escapedBranch)
-
-    $commitSha = [string]$commitInfo.sha
-
-    if ($commitSha -notmatch '^[0-9a-fA-F]{40}$') {
-        throw 'GitHub did not return a valid 40-character commit SHA.'
+    if ($PinnedSourceCommit -notmatch '^[0-9a-f]{40}$') {
+        throw 'Pinned source commit is not a valid SHA.'
     }
 
     return [pscustomobject]@{
-        DefaultBranch = $defaultBranch
-        CommitSha = $commitSha.ToLowerInvariant()
-        ArchiveUrl = (
-            $RepositoryUrl +
-            '/archive/' +
-            $commitSha.ToLowerInvariant() +
-            '.zip'
-        )
+        CommitSha = $PinnedSourceCommit
+        ArchiveUrl = ($RepositoryUrl + '/archive/' + $PinnedSourceCommit + '.zip')
     }
 }
 
@@ -564,7 +625,7 @@ try {
 
     $snapshot = Get-PCFCRepositorySnapshot
 
-    Write-Host ('Default branch: ' + $snapshot.DefaultBranch)
+    Write-Host 'Source trust policy: pinned v0.2.0-beta release commit'
     Write-Host ('Resolved commit: ' + $snapshot.CommitSha)
     Write-PCFCInfo 'Downloading that exact commit snapshot from the official GitHub repository...'
 
@@ -604,6 +665,11 @@ try {
     if (Test-PathHasReparseAncestor -Path $repositoryDirectory) {
         throw 'The extracted repository path is unsafe.'
     }
+
+    Write-PCFCSection 'Pinned Source Integrity Verification'
+
+    Test-PCFCPinnedSource -RepositoryDirectory $repositoryDirectory -ExpectedHashes $TrustedSourceHashes
+    Write-PCFCOk ('Pinned source SHA-256 verification passed for ' + $TrustedSourceHashes.Count + ' trust-critical files.')
 
     Write-PCFCSection 'Repository Verification'
 
