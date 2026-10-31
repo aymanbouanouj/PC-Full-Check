@@ -1,0 +1,78 @@
+name: Publish v0.2.1-beta
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - RELEASE_NOTES.md
+      - .github/workflows/publish-v0.2.1-beta.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-v0.2.1-beta
+  cancel-in-progress: false
+
+jobs:
+  verify-release:
+    name: Verify release source on Windows
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact release commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Run dependency-free repository checks
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & ".\tests\run-tests.ps1"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+  publish-release:
+    name: Publish immutable beta release
+    needs: verify-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Check out exact tested commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Publish v0.2.1-beta prerelease (one time only)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          if gh release view v0.2.1-beta --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo "Release v0.2.1-beta already exists; no action taken."
+            exit 0
+          fi
+          if git ls-remote --tags origin refs/tags/v0.2.1-beta | grep -q .; then
+            echo "Tag already exists without a release; refusing to retarget it."
+            exit 1
+          fi
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path("RELEASE_NOTES.md").read_text(encoding="utf-8")
+          marker = "\n# Historical v0.2.0-beta release notes\n"
+          assert marker in text, "Release notes boundary missing"
+          notes = text.split(marker, 1)[0].strip() + "\n"
+          assert notes.startswith("# PC Full Check for Windows v0.2.1-beta\n")
+          Path("/tmp/pcfc-v0.2.1-release-notes.md").write_text(notes, encoding="utf-8")
+          PY
+          gh release create v0.2.1-beta \
+            --repo "$GH_REPO" \
+            --target "$GITHUB_SHA" \
+            --title "PC Full Check for Windows v0.2.1-beta" \
+            --notes-file /tmp/pcfc-v0.2.1-release-notes.md \
+            --prerelease
+          gh release view v0.2.1-beta --repo "$GH_REPO" --json tagName,isPrerelease,url

@@ -6,12 +6,16 @@ All notable project changes are documented here.
 
 ## Unreleased
 
-### Security hardening (unreleased)
+## 0.2.1-beta — 2026-10-31
+
+### Security hardening
 
 - Pinned the optional Easy Runner to the reviewed `v0.2.0-beta` source commit instead of automatically following the default branch.
 - Added embedded SHA-256 allowlisting for the downloaded PowerShell scripts and public-file manifest, verified before any downloaded script or test executes.
 - Added fail-closed checks for missing or unexpected files and for reparse points, with offline synthetic tampering regression tests.
-- Documented the launcher bootstrap trust limit and deliberate review required for future source updates; the diagnostic engine and historical release tags are unchanged.
+- Documented the launcher bootstrap trust limit and deliberate review required for future source updates; the diagnostic engine retains its read-only behavior and historical release tags are unchanged.
+- Updated tool/report version metadata and fictional fixtures to `0.2.1-beta`, and pinned the launcher to the vetted `b8b02fdf667712062be482cd52ccb0068d5393aa` source snapshot.
+- New version DOI is pending a separate Zenodo version deposit; the older DOI must not be reused.
 
 ## 0.2.0-beta — 2026-09-14
 

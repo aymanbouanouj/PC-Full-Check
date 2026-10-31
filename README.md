@@ -1,6 +1,6 @@
 # PC Full Check for Windows
 
-**Version 0.2.0-beta — public beta**
+**Version 0.2.1-beta — security maintenance beta**
 
 PC Full Check for Windows is a privacy-first, read-only Windows PowerShell diagnostic aid. It collects selected hardware, Windows, storage, battery, security, update, driver, and reliability evidence, then writes local HTML, JSON, text, and log reports with transparent statuses. The core diagnostic engine does not upload data, install dependencies, or repair the computer.
 
@@ -15,7 +15,7 @@ The core diagnostic script does not auto-elevate. The optional `PCFC-Easy-Runner
 
 ## Privacy and safety
 
-Version 0.2.0-beta is privacy-mode only. There is no public or hidden sensitive mode. Core diagnostic processing is local, with no network request, telemetry, analytics, or upload behavior in `PC-Full-Check.ps1`. The optional Easy Runner uses HTTPS only to resolve and download an exact source snapshot from the official GitHub repository; it does not upload diagnostic reports.
+Version 0.2.1-beta is privacy-mode only. There is no public or hidden sensitive mode. Core diagnostic processing is local, with no network request, telemetry, analytics, or upload behavior in `PC-Full-Check.ps1`. The optional Easy Runner uses HTTPS to download a reviewed, pinned source snapshot and verifies executable-file hashes before running downloaded scripts; it does not upload diagnostic reports.
 
 Privacy mode excludes documented direct identifiers and never saves raw localized integrity output. It reduces exposure but does not provide anonymity: reports can still reveal hardware, software, driver, update, device, event, security, and storage information. Review every report before sharing it.
 
@@ -33,7 +33,7 @@ For the easiest supported launch path, save `PCFC-Easy-Runner.ps1` as a `.ps1` f
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\PCFC-Easy-Runner.ps1"
 ```
 
-The Easy Runner defaults to Standard mode and requests UAC when needed. For security, this launcher **pins the reviewed `v0.2.0-beta` source commit** (`07839dcdf8541a8e1fb691da4b34a61966c82b3b`) instead of automatically following `main`. It downloads that exact source snapshot over HTTPS, compares every downloaded PowerShell script and the public file manifest against SHA-256 values embedded in the launcher, rejects unexpected or missing files, then runs repository tests and invokes `PC-Full-Check.ps1`. This trust policy protects an **already trusted local copy of the launcher**; downloading a compromised launcher itself is outside this guarantee. Updating the trusted source requires a reviewed launcher update. Diagnostic reports remain local. Use `-Mode Quick` or `-Mode Full` only when needed; `Standard` remains the default.
+The Easy Runner defaults to Standard mode and requests UAC when needed. For security, this launcher **pins the reviewed `v0.2.1-beta` source snapshot** (`b8b02fdf667712062be482cd52ccb0068d5393aa`) instead of automatically following `main`. It downloads that exact source snapshot over HTTPS, compares every downloaded PowerShell script and the public file manifest against SHA-256 values embedded in the launcher, rejects unexpected or missing files, then runs repository tests and invokes `PC-Full-Check.ps1`. This trust policy protects an **already trusted local copy of the launcher**; downloading a compromised launcher itself is outside this guarantee. Updating the trusted source requires a reviewed launcher update. Diagnostic reports remain local. Use `-Mode Quick` or `-Mode Full` only when needed; `Standard` remains the default.
 
 ### Direct diagnostic engine
 
@@ -127,12 +127,13 @@ The original unpublished executable is not part of this repository and is not a 
 
 [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23273476.svg)](https://doi.org/10.5281/zenodo.23273476)
 
-- **Specific archived release:** [v0.2.0-beta on Zenodo](https://doi.org/10.5281/zenodo.23273477) — cite this DOI when referring to the exact `v0.2.0-beta` source archive.
-- **All archived versions:** [Zenodo concept DOI](https://doi.org/10.5281/zenodo.23273476) — resolves to the latest version archived under this Zenodo record.
+- **Previous archived release:** [v0.2.0-beta on Zenodo](https://doi.org/10.5281/zenodo.23273477) — this DOI applies ONLY to historical `v0.2.0-beta`, not the current maintenance beta.
+- **Current v0.2.1-beta:** a separate Zenodo version DOI has not yet been assigned. Do not cite the historical version DOI for this release.
+- **All Zenodo-archived versions:** [Zenodo concept DOI](https://doi.org/10.5281/zenodo.23273476) — resolves to the newest version actually deposited on Zenodo, which may differ from the newest GitHub release.
 - **Original GitHub release:** [v0.2.0-beta](https://github.com/aymanbouanouj/PC-Full-Check/releases/tag/v0.2.0-beta).
 - **Author ORCID:** [0009-0001-6071-9418](https://orcid.org/0009-0001-6071-9418).
 
-For citation metadata, see [CITATION.cff](CITATION.cff). The project remains licensed under MIT; Zenodo archival does not change the software license or historical Git tags.
+For current citation metadata, see [CITATION.cff](CITATION.cff), which intentionally omits an unassigned current-version DOI. The project remains MIT-licensed; historical Git tags and Zenodo archives are unaffected.
 
 ## Author
 

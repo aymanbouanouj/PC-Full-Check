@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes are currently provided for the `0.1.x` public beta line on Windows 10 and Windows 11 with Windows PowerShell 5.1 or later. Capability can vary by Windows edition, hardware, firmware, driver, and permission level.
+The current security-maintenance beta is `v0.2.1-beta` for Windows 10 and Windows 11 with Windows PowerShell 5.1 or later. Historical versions are preserved, not retroactively patched. Capability can vary by Windows edition, hardware, firmware, driver, and permission level.
 
 ## Read-only design
 
@@ -16,7 +16,7 @@ Output paths are canonicalized, checked for inspected reparse points, constraine
 
 ## Optional Easy Runner trust boundary
 
-The Easy Runner is intentionally separate from the diagnostic engine. It downloads the reviewed, pinned `v0.2.0-beta` commit `07839dcdf8541a8e1fb691da4b34a61966c82b3b`, rather than automatically trusting the latest default branch. Before running any downloaded scripts or tests, it validates embedded SHA-256 hashes for **all** PowerShell scripts and the public-file manifest from that approved commit, rejects missing or unexpected public files and untrusted scripts, and rejects reparse points. Only then does it parse maintained scripts and execute the downloaded repository tests.
+The Easy Runner is intentionally separate from the diagnostic engine. It downloads the reviewed, pinned `v0.2.1-beta` source commit `b8b02fdf667712062be482cd52ccb0068d5393aa`, rather than automatically trusting the latest default branch. Before running any downloaded scripts or tests, it validates embedded SHA-256 hashes for **all** PowerShell scripts and the public-file manifest from that approved commit, rejects missing or unexpected public files and untrusted scripts, and rejects reparse points. Only then does it parse maintained scripts and execute the downloaded repository tests.
 
 The runner's ZIP SHA-256 display remains a trace hash, not a signature. The **fixed SHA-256 reference hashes embedded in a previously trusted launcher** form the integrity trust anchor for executable downloaded files. A compromised initial launcher download remains outside that trust boundary; this is not a signed-release mechanism or blanket assurance against all supply-chain attacks. Other non-executable public documents are inventory-checked against the SHA-256-verified manifest but not individually hashed. Releases must be deliberately reviewed and re-pinned to update the trusted source. HTTPS transport remains required. No Git installation, network uploads, or diagnostic repairs are introduced.
 

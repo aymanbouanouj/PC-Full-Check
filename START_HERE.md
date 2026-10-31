@@ -27,6 +27,8 @@ There is no supported `All` mode. If you need separate Quick, Standard, and Full
 
 Use this when you have **not downloaded the repository** and want the launcher to obtain the official source automatically.
 
+**Important source-trust limitation:** this bootstrap gets the initial launcher from a changing `main` commit over HTTPS. The embedded hash checks of subsequent downloads do not independently verify the launcher itself. Prefer a locally reviewed copy of the launcher from the versioned GitHub Release. Do not execute code you have not verified.
+
 ## Step 1 — Open Windows PowerShell
 
 Open **Windows PowerShell** from the Start menu.

@@ -1,3 +1,32 @@
+# PC Full Check for Windows v0.2.1-beta
+
+Creator and maintainer: Ayman Bounaouj
+Release date: 2026-10-31
+Copyright 2026 Ayman Bounaouj
+License: MIT
+
+## Security maintenance since v0.2.0-beta
+
+- Hardened the optional Easy Runner privileged source-acquisition boundary (PR #7; Issue #6).
+- Require a reviewed, pinned commit and embedded SHA-256 hashes for the downloaded PowerShell scripts and manifest BEFORE executing downloaded tests and diagnostics.
+- Reject mismatched or missing trusted files, unexpected files, and reparse points.
+- Keep local privacy-first, read-only Quick/Standard/Full diagnostics with no report uploads, repairs, or new dependencies.
+- Update the diagnostic tool/report version and fictional fixture metadata to `0.2.1-beta`.
+- Trust in the *initial launcher* is required; the hash checks do not authenticate an untrusted first copy.
+- This release pins the validated v0.2.1-beta source snapshot at commit `b8b02fdf667712062be482cd52ccb0068d5393aa` instead of using the latest `main`; future source updates need explicit review.
+
+## Validation and limitations
+
+- The original security change on PR #7 passed Windows GitHub Actions static validation: `TOTAL=79; PASSED=78; FAILED=0; NOT_EXECUTED=1`.
+- The maintainer's reported elevated Quick test returned `RUNNER_EXIT=0`, generated all four expected reports, and produced valid JSON on one Windows computer.
+- Final release-candidate static CI is required on the new version commit; this is not a claim of broad Windows or hardware certification.
+- Historical `v0.1.0-beta` and `v0.2.0-beta` Git tags/releases/archives are unchanged.
+- The old Zenodo version DOI `10.5281/zenodo.23273477` applies only to `v0.2.0-beta`. An independent DOI for `v0.2.1-beta` requires a new Zenodo version deposit.
+
+---
+
+# Historical v0.2.0-beta release notes
+
 # PC Full Check for Windows v0.2.0-beta
 
 Creator and maintainer: Ayman Bounaouj
