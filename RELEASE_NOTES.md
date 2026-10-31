@@ -21,7 +21,7 @@ License: MIT
 - The maintainer's reported elevated Quick test returned `RUNNER_EXIT=0`, generated all four expected reports, and produced valid JSON on one Windows computer.
 - Final release-candidate static CI is required on the new version commit; this is not a claim of broad Windows or hardware certification.
 - Historical `v0.1.0-beta` and `v0.2.0-beta` Git tags/releases/archives are unchanged.
-- The old Zenodo version DOI `10.5281/zenodo.23273477` applies only to `v0.2.0-beta`. An independent DOI for `v0.2.1-beta` requires a new Zenodo version deposit.
+- Zenodo now lists a separate `v0.2.1-beta` archive with version DOI [`10.5281/zenodo.23839790`](https://doi.org/10.5281/zenodo.23839790). The previous version DOI `10.5281/zenodo.23273477` remains exclusive to `v0.2.0-beta`; the concept DOI for all versions is `10.5281/zenodo.23273476`. The recorded Zenodo ZIP checksum must still be compared with the tagged GitHub source archive.
 
 ---
 
