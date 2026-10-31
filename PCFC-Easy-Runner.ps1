@@ -267,7 +267,7 @@ function Test-PCFCPinnedSource {
     # The trusted manifest is embedded in the launcher, never loaded from the ZIP.
     # It protects executable scripts and the allowlist; other documents are
     # restricted by the authenticated public-file manifest's file inventory.
-    $root = [System.IO.Path]::GetFullPath($RepositoryDirectory).TrimEnd('\\')
+    $root = [System.IO.Path]::GetFullPath($RepositoryDirectory).TrimEnd([char]'\')
 
     if (-not (Test-Path -LiteralPath $root -PathType Container)) {
         throw 'Trusted source validation: repository directory is missing.'
@@ -278,7 +278,7 @@ function Test-PCFCPinnedSource {
             throw ('Trusted source validation: invalid locked path: ' + $path)
         }
 
-        $absolute = Join-Path $root ($path -replace '/', '\\')
+        $absolute = Join-Path $root ($path -replace '/', '\')
 
         if (-not (Test-Path -LiteralPath $absolute -PathType Leaf)) {
             throw ('Trusted source validation: required file missing: ' + $path)
@@ -304,7 +304,7 @@ function Test-PCFCPinnedSource {
     $approved = @{}
 
     foreach ($path in $listed) {
-        $normalized = $path.Trim().Replace('\\', '/')
+        $normalized = $path.Trim().Replace('\', '/')
         if (
             $normalized -notmatch '^[a-zA-Z0-9_.\-/]+$' -or
             $normalized -match '(^|/)\.\.(/|$)' -or
@@ -325,7 +325,7 @@ function Test-PCFCPinnedSource {
 
         if ($item.PSIsContainer) { continue }
 
-        $relative = $item.FullName.Substring($root.Length + 1).Replace('\\', '/')
+        $relative = $item.FullName.Substring($root.Length + 1).Replace('\', '/')
         if (-not $approved.ContainsKey($relative)) {
             throw ('Trusted source validation: unexpected file: ' + $relative)
         }

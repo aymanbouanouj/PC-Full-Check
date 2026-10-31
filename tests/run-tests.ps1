@@ -402,7 +402,7 @@ Test-Case 'PC-Full-Check.ps1 remains the only supported public diagnostic entry 
 Test-Case 'Optional Easy Runner preserves the documented network and diagnostic trust boundary' {
     return (Test-Path -LiteralPath $EasyRunnerPath -PathType Leaf) -and
         $easyRunnerSource -match '\[string\]\$Mode = ''Standard''' -and
-        $easyRunnerSource -match "\\$PinnedSourceCommit = '07839dcdf8541a8e1fb691da4b34a61966c82b3b'" -and
+        $easyRunnerSource -match [regex]::Escape('$PinnedSourceCommit = ''07839dcdf8541a8e1fb691da4b34a61966c82b3b''') -and
         $easyRunnerSource -match "'/archive/'" -and
         $easyRunnerSource -match 'tests\\run-tests\.ps1' -and
         $easyRunnerSource -match 'PC-Full-Check\.ps1' -and
