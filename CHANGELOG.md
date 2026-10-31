@@ -6,6 +6,13 @@ All notable project changes are documented here.
 
 ## Unreleased
 
+### Security hardening (unreleased)
+
+- Pinned the optional Easy Runner to the reviewed `v0.2.0-beta` source commit instead of automatically following the default branch.
+- Added embedded SHA-256 allowlisting for the downloaded PowerShell scripts and public-file manifest, verified before any downloaded script or test executes.
+- Added fail-closed checks for missing or unexpected files and for reparse points, with offline synthetic tampering regression tests.
+- Documented the launcher bootstrap trust limit and deliberate review required for future source updates; the diagnostic engine and historical release tags are unchanged.
+
 ## 0.2.0-beta — 2026-09-14
 
 ### Added
