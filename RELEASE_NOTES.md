@@ -13,7 +13,7 @@ License: MIT
 - Keep local privacy-first, read-only Quick/Standard/Full diagnostics with no report uploads, repairs, or new dependencies.
 - Update the diagnostic tool/report version and fictional fixture metadata to `0.2.1-beta`.
 - Trust in the *initial launcher* is required; the hash checks do not authenticate an untrusted first copy.
-- A new pinned source revision must be explicitly reviewed rather than silently using the latest `main`.
+- This release pins the validated v0.2.1-beta source snapshot at commit `b922cd93d39840b39bce07548b98eab71bf34323` instead of using the latest `main`; future source updates need explicit review.
 
 ## Validation and limitations
 

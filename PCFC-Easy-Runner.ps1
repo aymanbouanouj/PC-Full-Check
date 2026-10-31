@@ -6,7 +6,7 @@
 
 .DESCRIPTION
     PCFC-Easy-Runner.ps1 is a convenience launcher, not a second diagnostic engine.
-    It downloads the explicitly pinned v0.2.0-beta commit source, verifies
+    It downloads the explicitly pinned v0.2.1-beta source snapshot, verifies
     trusted SHA-256 values for every downloaded PowerShell script and the public
     file manifest before executing downloaded tests or diagnostics, and then
     invokes PC-Full-Check.ps1. Updating the pinned source requires code review.
@@ -40,17 +40,17 @@ $RunnerDirectoryName = 'PC-Full-Check-Runner'
 
 # Deliberately approved source snapshot. Update this lock only after reviewing
 # a future release's complete executable sources and tests.
-$PinnedSourceCommit = '07839dcdf8541a8e1fb691da4b34a61966c82b3b'
+$PinnedSourceCommit = 'b922cd93d39840b39bce07548b98eab71bf34323'
 $TrustedSourceHashes = @{
-    'PC-Full-Check.ps1' = 'c59d28c3557b779f2f00f0c9716d0e1ca9021793850a536e7c4055c5c838ff2f'
-    'PCFC-Easy-Runner.ps1' = '9d93f9607f18cab2a1dff382553fd7fc9495234e7571083ede4b4af5c36210b2'
+    'PC-Full-Check.ps1' = '7bbb289a8c21758585fbec58941300c7099ecaffb1c7def619088d81d3744db1'
+    'PCFC-Easy-Runner.ps1' = '412d661b117e0fe626db5afb3f74241c23ca78ca3a96d7b8f2c5c16f264cc2e5'
     'internal/ChkdskProduction.ps1' = '6bbffc58251523c8145409e1f30e24d1ae9ad9a5c249ba67ebccd667cf4b8ea7'
     'tests/assessment-tests.ps1' = '05d715a6d27156e1c696c5e5d0477e60f3f188d20434047a39eb7605ecc20de3'
     'tests/chkdsk-tests.ps1' = 'd8ffb313bb035ea2ed4e85cbfd5a1ca1ebdcb1a59bb6bafe707869287947a4ca'
     'tests/privacy-validation.ps1' = '21002c2b5090957c538b5288ef95f2a1c5e67dc69770cf70332ae145b45ccc6f'
     'tests/run-final-full-validation.ps1' = 'f15856d89def7d7a499e0cb9b907075da82b1f8dacb475a1561c4c5a1b7b0312'
     'tests/run-integrated-chkdsk-validation.ps1' = '1c719775a778c1c6f3a1a2bd76d54faf17d08dd637cf54b691766197674bac3d'
-    'tests/run-tests.ps1' = 'f3575b8f052dfccfca41b5dd2e65d4e5b8741917080adabe878475ac81733785'
+    'tests/run-tests.ps1' = 'a80fab02499c7ae51076d2f4ba4ce93b1c36c313bc7fd3e0bd15e6be9253f73c'
     'docs/public-file-manifest.txt' = '4675729d38a92e02ad57acaa4837b54fc04470afebdbaab097e4f5e744cf1625'
 }
 
@@ -369,7 +369,7 @@ function Invoke-PCFCDownload {
 }
 
 function Get-PCFCRepositorySnapshot {
-    Write-PCFCInfo 'Using the reviewed, pinned v0.2.0-beta source commit.'
+    Write-PCFCInfo 'Using the reviewed, pinned v0.2.1-beta source commit.'
     Write-PCFCInfo 'Automatic default-branch updates are intentionally disabled.'
 
     if ($PinnedSourceCommit -notmatch '^[0-9a-f]{40}$') {
@@ -625,7 +625,7 @@ try {
 
     $snapshot = Get-PCFCRepositorySnapshot
 
-    Write-Host 'Source trust policy: pinned v0.2.0-beta release commit'
+    Write-Host 'Source trust policy: pinned v0.2.1-beta source commit'
     Write-Host ('Resolved commit: ' + $snapshot.CommitSha)
     Write-PCFCInfo 'Downloading that exact commit snapshot from the official GitHub repository...'
 

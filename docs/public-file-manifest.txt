@@ -1,4 +1,5 @@
 .github/workflows/ci.yml
+.github/workflows/publish-v0.2.1-beta.yml
 .gitignore
 AUTHORS.md
 BLOCKED_DECISIONS.md
