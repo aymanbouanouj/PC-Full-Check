@@ -14,7 +14,7 @@ All notable project changes are documented here.
 - Added embedded SHA-256 allowlisting for the downloaded PowerShell scripts and public-file manifest, verified before any downloaded script or test executes.
 - Added fail-closed checks for missing or unexpected files and for reparse points, with offline synthetic tampering regression tests.
 - Documented the launcher bootstrap trust limit and deliberate review required for future source updates; the diagnostic engine retains its read-only behavior and historical release tags are unchanged.
-- Updated tool/report version metadata and fictional fixtures to `0.2.1-beta`, and pinned the launcher to the vetted `b922cd93d39840b39bce07548b98eab71bf34323` source snapshot.
+- Updated tool/report version metadata and fictional fixtures to `0.2.1-beta`, and pinned the launcher to the vetted `b8b02fdf667712062be482cd52ccb0068d5393aa` source snapshot.
 - New version DOI is pending a separate Zenodo version deposit; the older DOI must not be reused.
 
 ## 0.2.0-beta — 2026-09-14

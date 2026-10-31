@@ -40,18 +40,18 @@ $RunnerDirectoryName = 'PC-Full-Check-Runner'
 
 # Deliberately approved source snapshot. Update this lock only after reviewing
 # a future release's complete executable sources and tests.
-$PinnedSourceCommit = 'b922cd93d39840b39bce07548b98eab71bf34323'
+$PinnedSourceCommit = 'b8b02fdf667712062be482cd52ccb0068d5393aa'
 $TrustedSourceHashes = @{
     'PC-Full-Check.ps1' = '7bbb289a8c21758585fbec58941300c7099ecaffb1c7def619088d81d3744db1'
-    'PCFC-Easy-Runner.ps1' = '412d661b117e0fe626db5afb3f74241c23ca78ca3a96d7b8f2c5c16f264cc2e5'
+    'PCFC-Easy-Runner.ps1' = 'e3d7a6e04fa29dc868a34ba577b8191f2f1c93cba643ca2fdf2989e1fb0497bf'
     'internal/ChkdskProduction.ps1' = '6bbffc58251523c8145409e1f30e24d1ae9ad9a5c249ba67ebccd667cf4b8ea7'
     'tests/assessment-tests.ps1' = '05d715a6d27156e1c696c5e5d0477e60f3f188d20434047a39eb7605ecc20de3'
-    'tests/chkdsk-tests.ps1' = 'd8ffb313bb035ea2ed4e85cbfd5a1ca1ebdcb1a59bb6bafe707869287947a4ca'
+    'tests/chkdsk-tests.ps1' = '4cbb056bb4606bff073ce929f90a26615421a918bd577d4459c1ba383b77d70d'
     'tests/privacy-validation.ps1' = '21002c2b5090957c538b5288ef95f2a1c5e67dc69770cf70332ae145b45ccc6f'
     'tests/run-final-full-validation.ps1' = 'f15856d89def7d7a499e0cb9b907075da82b1f8dacb475a1561c4c5a1b7b0312'
     'tests/run-integrated-chkdsk-validation.ps1' = '1c719775a778c1c6f3a1a2bd76d54faf17d08dd637cf54b691766197674bac3d'
-    'tests/run-tests.ps1' = 'a80fab02499c7ae51076d2f4ba4ce93b1c36c313bc7fd3e0bd15e6be9253f73c'
-    'docs/public-file-manifest.txt' = '4675729d38a92e02ad57acaa4837b54fc04470afebdbaab097e4f5e744cf1625'
+    'tests/run-tests.ps1' = '5838e1a8698e387e762e2227b6724cc8ab906d96b6c7a467f1800c1f0fa2d790'
+    'docs/public-file-manifest.txt' = 'd18a353445d1675c64e454f91ade5d68db861e9f55945b3b2835de96ab63dd23'
 }
 
 function Write-PCFCSection {
