@@ -1,3 +1,24 @@
+# v0.2.1-beta security maintenance checklist
+
+Version: 0.2.1-beta
+Target release date: 2026-10-31
+
+- [x] Prior tag/release history preserved before preparing the release
+- [x] Security hardening merged in PR #7
+- [x] Elevated Quick mode tested on one Windows computer (reported exit 0; reports existed and JSON parsed)
+- [ ] New locked source snapshot accepted, and tested on Windows
+- [ ] Fresh release-candidate static CI passes with zero failures
+- [ ] Main merge commit passes post-merge GitHub Actions CI
+- [ ] Version v0.2.1-beta tag created for immutable merge commit
+- [ ] GitHub Release marked as prerelease and published
+- [ ] New Zenodo version deposited and new DOI recorded (do not reuse v0.2.0-beta DOI)
+
+No new automatic Full-mode diagnostics are requested. The bootstrap launcher still requires independent trust.
+
+---
+
+# Historical v0.2.0-beta checklist (unchanged)
+
 # Public beta release checklist
 
 Version: 0.2.0-beta

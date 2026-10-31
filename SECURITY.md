@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes are currently provided for the `0.1.x` public beta line on Windows 10 and Windows 11 with Windows PowerShell 5.1 or later. Capability can vary by Windows edition, hardware, firmware, driver, and permission level.
+The current security-maintenance beta is `v0.2.1-beta` for Windows 10 and Windows 11 with Windows PowerShell 5.1 or later. Historical versions are preserved, not retroactively patched. Capability can vary by Windows edition, hardware, firmware, driver, and permission level.
 
 ## Read-only design
 

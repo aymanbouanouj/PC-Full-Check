@@ -186,7 +186,7 @@ Test-Case 'Both assessment fixtures parse and are clearly fictional' {
         if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { return $false }
         try { $fixture = Get-Content -Raw -LiteralPath $path | ConvertFrom-Json -ErrorAction Stop } catch { return $false }
         if ($fixture.FictionalFixture -ne $true -or $fixture.FixtureNotice -notmatch '^FICTIONAL TEST FIXTURE - NOT A REAL COMPUTER REPORT$') { return $false }
-        if (@($fixture.Checks).Count -eq 0 -or $fixture.Privacy.State -ne 'Privacy mode only (v0.2.0-beta)') { return $false }
+        if (@($fixture.Checks).Count -eq 0 -or $fixture.Privacy.State -ne 'Privacy mode only (v0.2.1-beta)') { return $false }
     }
     return $true
 }
@@ -235,7 +235,7 @@ Test-Case 'Maintained script does not use Format-List star on sensitive data' {
 Test-Case 'Output-path creation rejects non-empty directories and uses terminating errors' {
     return $source -match 'GetUnresolvedProviderPathFromPSPath' -and $source -match 'new or empty directory' -and $source -match 'New-Item -ItemType Directory.+-ErrorAction Stop'
 }
-Test-Case 'Sensitive collection cannot execute in v0.2.0-beta' {
+Test-Case 'Sensitive collection cannot execute in v0.2.1-beta' {
     return $source -notmatch 'IncludeSensitiveData|Read-Host|Invoke-RawReportCommand|Invoke-SensitiveTextCommand|SENSITIVE_' -and
         $source -notmatch '(?i)dsregcmd\.exe|slmgr\.vbs|msinfo32\.exe|dxdiag\.exe|[''"]/(?:batteryreport|sleepstudy|systemsleepdiagnostics|energy)[''"]' -and
         $source -match 'SensitiveMode = \$false'
@@ -246,11 +246,11 @@ Test-Case 'Unsafe Full entries are fixed Omitted-only definitions' {
         if ($source -notmatch ("New-PrivacyOnlyOmittedDefinition '" + [regex]::Escape($name) + "'")) { return $false }
     }
     return ([regex]::Matches($source, "New-PrivacyOnlyOmittedDefinition '")).Count -eq 8 -and
-        $source -match 'sensitive-report collection is unavailable in v0\.2\.0-beta'
+        $source -match 'sensitive-report collection is unavailable in v0\.2\.1-beta'
 }
 Test-Case 'README does not expose sensitive collection as available' {
     $readme = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'README.md')
-    return $readme -notmatch 'IncludeSensitiveData' -and $readme -match 'Version 0\.2\.0-beta is privacy-mode only' -and
+    return $readme -notmatch 'IncludeSensitiveData' -and $readme -match 'Version 0\.2\.1-beta is privacy-mode only' -and
         $readme -match 'There is no public or hidden sensitive mode'
 }
 Test-Case 'Native commands use availability checks, timeouts, and exit codes' {
@@ -397,7 +397,7 @@ Test-Case 'PC-Full-Check.ps1 remains the only supported public diagnostic entry 
         @($topLevelScripts | Where-Object { $_ -ceq 'PCFC-Easy-Runner.ps1' }).Count -eq 1 -and
         $readme -match [regex]::Escape('PC-Full-Check.ps1` is the only supported diagnostic entry point.') -and
         $readme -match 'PCFC-Easy-Runner\.ps1.*optional convenience launcher' -and
-        $source -match "Version: 0\.2\.0-beta"
+        $source -match "Version: 0\.2\.1-beta"
 }
 Test-Case 'Optional Easy Runner preserves the documented network and diagnostic trust boundary' {
     return (Test-Path -LiteralPath $EasyRunnerPath -PathType Leaf) -and
@@ -575,8 +575,8 @@ Test-Case 'Required release metadata files and version exist' {
     $notesPath = Join-Path $ProjectRoot 'RELEASE_NOTES.md'
     $checklistPath = Join-Path $ProjectRoot 'RELEASE_CHECKLIST.md'
     return (Test-Path -LiteralPath $notesPath -PathType Leaf) -and (Test-Path -LiteralPath $checklistPath -PathType Leaf) -and
-        (Get-Content -Raw -LiteralPath $notesPath) -match 'v0\.2\.0-beta' -and
-        (Get-Content -Raw -LiteralPath $checklistPath) -match 'Version: 0\.2\.0-beta'
+        (Get-Content -Raw -LiteralPath $notesPath) -match 'v0\.2\.1-beta' -and
+        (Get-Content -Raw -LiteralPath $checklistPath) -match 'Version: 0\.2\.1-beta'
 }
 Test-Case 'Public authorship metadata consistently names Ayman Bounaouj' {
     $author = 'Ayman Bounaouj'
@@ -594,19 +594,19 @@ Test-Case 'Public authorship metadata consistently names Ayman Bounaouj' {
     }
     return $true
 }
-Test-Case 'CITATION.cff has safe CFF 1.2 author structure and Zenodo metadata' {
+Test-Case 'CITATION.cff has current release metadata and no unassigned version DOI' {
     $citation = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'CITATION.cff')
     return $citation -notmatch "`t" -and
         $citation -match '(?m)^cff-version: 1\.2\.0\s*$' -and
         $citation -match '(?m)^message: "If you use this software, please cite it as below\."\s*$' -and
         $citation -match '(?m)^title: "PC Full Check for Windows"\s*$' -and
-        $citation -match '(?m)^version: "0\.2\.0-beta"\s*$' -and
+        $citation -match '(?m)^version: "0\.2\.1-beta"\s*$' -and
         $citation -match '(?m)^type: software\s*$' -and
         $citation -match '(?m)^authors:\r?\n  - family-names: "Bounaouj"\r?\n    given-names: "Ayman"\r?\n    orcid: "https://orcid\.org/0009-0001-6071-9418"\s*$' -and
-        $citation -match '(?m)^doi: "10\.5281/zenodo\.23273477"\s*$' -and
+        $citation -notmatch '(?m)^doi:' -and
         $citation -match '(?m)^repository-code: "https://github\.com/aymanbouanouj/PC-Full-Check"\s*$' -and
         $citation -match '(?m)^license: MIT\s*$' -and
-        $citation -match '(?m)^date-released: 2026-09-14\s*$' -and
+        $citation -match '(?m)^date-released: 2026-10-31\s*$' -and
         $citation -notmatch '(?im)^\s*(?:email|url):'
 }
 Test-Case 'Configured Git email does not appear in any public file' {
@@ -738,7 +738,7 @@ Test-Case 'Current fictional sample contains the complete unconditional summary 
         if ($sample.PSObject.Properties.Name -notcontains $field) { return $false }
     }
     return $sample.SampleNotice -match '^FICTIONAL SANITIZED EXAMPLE' -and
-        $sample.Privacy.State -eq 'Privacy mode only (v0.2.0-beta)' -and
+        $sample.Privacy.State -eq 'Privacy mode only (v0.2.1-beta)' -and
         $sample.System.PSObject.Properties.Name -contains 'Battery' -and
         $sample.Findings.PSObject.Properties.Name -contains 'WHEAObservedFirst' -and
         $sample.Findings.PSObject.Properties.Name -contains 'WHEAObservedLast' -and
